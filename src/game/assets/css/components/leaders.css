@@ -1,0 +1,23 @@
+.leader-item {
+  background: hsla(0, 0%, 100%, 0.8);
+  border-radius: 10px;
+  margin-bottom: 2px;
+  padding: 10px 5px;
+}
+
+.leader-item table {
+  width: 100%;
+}
+
+.leaders-container {
+  height: 100%;
+  display: flex;
+  gap: 1rem;
+  padding: 0px 1rem;
+  flex-direction: column;
+}
+
+.leaders-body {
+  overflow-y: scroll;
+  flex: 1;
+}

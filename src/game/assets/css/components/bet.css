@@ -1,0 +1,33 @@
+.keno-bet-options {
+  background-color: var(--paytable-bg-color);
+  border-radius: var(--md-radius);
+  padding: var(--small-padding);
+}
+
+.autoplay-btn,
+.clear-btn {
+  flex: 1;
+  cursor: pointer;
+  padding: 3rem 0;
+}
+
+.input-wrap {
+  width: 100%;
+  display: flex;
+  flex-shrink: 0;
+  box-shadow: var(--stake-selector-boxshadow);
+  border-radius: var(--md-radius);
+  background-color: #2f4553;
+  height: 44px;
+  margin-bottom: 1rem;
+}
+
+.input-wrapper {
+  background-color: var(--stake-selector-input-bgcolor);
+  height: 100%;
+}
+
+.input-wrapper input {
+  background: transparent;
+  height: 100%;
+}

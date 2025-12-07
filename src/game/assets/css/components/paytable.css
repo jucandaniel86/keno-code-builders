@@ -1,0 +1,47 @@
+.paytable-container {
+  height: 40%;
+  overflow-y: auto;
+  background-color: var(--paytable-bg-color);
+  border-radius: 0.5rem;
+  padding: var(--small-padding);
+  color: rgb(177, 186, 211);
+}
+
+.paytable-row {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: grid;
+  margin-bottom: 0.5rem;
+}
+
+.semibold {
+  font-weight: 500;
+}
+
+.paytable-header {
+  border-bottom: 1px solid rgba(203 213 225);
+}
+
+.prizes-list {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.prizes-list thead {
+  background-color: #1a2c38;
+}
+
+.prizes-list tbody tr {
+  height: 30px;
+  background-color: #437589;
+}
+
+.prizes-list tbody tr:nth-child(odd) {
+  background-color: #244c5d;
+}
+
+.prizes-list tbody td {
+  padding: 0.25rem;
+  text-align: center;
+  color: #fff;
+  font-size: 0.8rem;
+}

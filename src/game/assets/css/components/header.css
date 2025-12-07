@@ -1,0 +1,47 @@
+.draw-info-container {
+  box-shadow: var(--top-container-boxshadow);
+  border: var(--top-container-border);
+  background: var(--top-container-bg);
+  height: var(--top-global-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.draw-info-details {
+  color: #fff;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: 20%;
+  padding: 1rem 0;
+}
+
+.clock-wrapper {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.draw-keno-type {
+  height: 100%;
+  display: flex;
+  gap: 0.5rem;
+  flex: 1;
+  padding-left: 1rem;
+}
+
+.keno-type-btn {
+  cursor: pointer;
+  height: 100%;
+  color: #b5b8c9;
+  font-weight: bold;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+}
+
+.keno-type-btn.active {
+  border-bottom: 2px solid var(--btn-green-bgcolor);
+  color: var(--btn-green-bgcolor);
+}

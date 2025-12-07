@@ -1,0 +1,28 @@
+.logo-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0;
+  height: var(--top-global-height);
+}
+
+.menu-btn {
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--menu-btn-color);
+  font-size: 24px;
+}
+
+.logo-text {
+  padding: 0;
+  margin: 0;
+  color: var(--logo-text-color);
+  font-size: 1.4rem;
+}

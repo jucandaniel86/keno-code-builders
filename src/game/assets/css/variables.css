@@ -1,0 +1,54 @@
+:root {
+  /** general **/
+  --base-bg-color: radial-gradient(
+    circle,
+    rgba(23, 64, 66, 1) 0%,
+    rgba(45, 86, 113, 1) 100%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+  --base-border-radius: 10px;
+  --small-padding: 0.25rem;
+  --small-radius: 0.25rem;
+  --md-radius: 0.5rem;
+  --full-radius: 100%;
+  --btn-green-bgcolor: #1c9464;
+  --btn-red-bgcolor: #fb0256;
+
+  /* TOP */
+  --top-container-boxshadow: #0003 0 4px 6px -1px, #0000001f 0 2px 4px -1px;
+  --top-container-border: none;
+  --top-container-bg: #1a2c38;
+
+  /* LEFT */
+  --left-container-bgcolor: #1f3646;
+  --menu-btn-color: #fff;
+  --logo-text-color: #fff;
+  --top-global-height: 60px;
+
+  /* PAYTABLES */
+  --paytable-bg-color: #213743;
+
+  /* NUMBERS */
+  --keno-number-bgcolor: #16373c;
+  --keno-number-bgcolor-hover: #2f5256;
+  --keno-number-color: #cef8fe;
+  --keno-number-font-size: 16px;
+  --keno-number-selected-bgcolor: #d1aa65;
+  --keno-number-selected-bgcolor-opacity: rgba(209, 170, 101, 0.5);
+  --keno-number-border: 1px solid #fff;
+  --hot-number-color: #944864;
+  --cold-number-color: #3f5e7a;
+  --keno-number-width: 30px;
+  --keno-number-height: 30px;
+
+  /** STAKE SELECTOR */
+  --stake-selector-boxshadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.12);
+  --stake-selector-input-bgcolor: #0f212e;
+
+  /** BOTTOM ACTIONS */
+  --bottom-bg-color: #1a2b3d;
+  --keno-autopick-label: #576777;
+
+  /** TIMER */
+  --progress-bar-bgcolor: #36a386;
+}

@@ -1,0 +1,71 @@
+.timer-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+
+.progress-bar-wrapper {
+  background-color: #fff;
+  height: 5px;
+}
+
+.progress-bar-wrapper .bar {
+  background-color: var(--progress-bar-bgcolor);
+  height: 100%;
+  transition: width 1s linear;
+}
+
+.timer-progress-wrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.timer-status-text {
+  color: var(--progress-bar-bgcolor);
+  font-size: 1rem;
+}
+
+.timer-status-text.betwarning {
+  color: var(--btn-red-bgcolor);
+  animation: blinker 1s linear infinite;
+}
+
+.progress-bar-wrapper .bar.barwarning {
+  background: var(--btn-red-bgcolor);
+}
+
+.timer-seconds {
+  color: #fff;
+  font-size: 2rem;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.timer-draw-details {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: #8899ab;
+}
+
+.draw-number {
+  color: #fff;
+}
+
+.timer-draw-details > span {
+  position: relative;
+}
+
+.timer-draw-details > span:first-child::after {
+  position: absolute;
+  width: 1px;
+  border-right: 1px solid #8899ab;
+  content: '';
+  height: 100%;
+  right: -5px;
+}

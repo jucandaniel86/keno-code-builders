@@ -1,0 +1,83 @@
+.history-container {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.history-tab-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background-color: #ddd9d9;
+}
+.history-tab-container:nth-child(odd) {
+  background: #ededed;
+}
+
+.history-tab-details-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.history-tab-details {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: grid;
+  margin-bottom: 0.5rem;
+  gap: 0.5rem;
+}
+
+.repeat-bet-btn {
+  background-color: #ccc;
+  color: #fff;
+  cursor: pointer;
+}
+
+.history-tab-tickets {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: grid;
+  margin-bottom: 0.5rem;
+  gap: 0.5rem;
+}
+
+.ticket {
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  background-color: #fff;
+}
+
+.ticket-numbers {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+}
+
+.BetTicketBall.selected {
+  background-color: #fff;
+}
+
+.BetTicketBall span {
+  display: block;
+  padding: 0.5rem;
+  border-radius: 50%;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+}
+
+.BetTicketBall.selected span {
+  background-color: #ff0000;
+}
+
+.BetTicketCell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.HistoryTicketIcon {
+  background-color: red;
+  width: 20px;
+  height: 20px;
+}

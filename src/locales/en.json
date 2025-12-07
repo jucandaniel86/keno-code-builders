@@ -1,0 +1,78 @@
+{
+  "components": {
+    "game": {
+      "select": "Select 1-10 numbers to play"
+    },
+    "sidebar": {
+      "betAmount": "Bet Amount"
+    },
+    "settings": {
+      "instantBet": "Instant Bet",
+      "animations": "Animations",
+      "maxBet": "Max Bet",
+      "gameInfo": "Game Info",
+      "exit": "Exit",
+      "history": "History"
+    }
+  },
+  "info": {
+    "title": "Game Info",
+    "rtp": "RTP",
+    "content": "<p>Welcome to the heart of the Wild West with <strong>Cowboy Keno</strong>, where luck is drawn faster than a gunslinger's pistol! In this exhilarating lottery game, players can wrangle their fortunes by selecting a set of lucky numbers, ranging from a daring 2 to a fearless 10. It's not just selecting numbers; it's taking shots at the biggest win in town.</p><p>The RTP (Return-to-Player) can be between 52,87% and a maximum of 75.32%, depending on the amount of numbers selected by the player.</p><h2>How To Play</h2><ul><li>Choose between 2 to 10 numbers on the 80-number grid. Click a desired number on the grid, to select it. The color of the selected number will change to a different color, to show that the selection has been made. To deselect a number, click on an already selected number. </li><li>To change your play amount value, use the option from under the the PLAY button from the right part of the screen. This will alter the play amount per game.</li><li>If you want to rerun the chances with a previous number selection, use the “Previous Selection” option, on the bottom of the screen.</li><li>Use “Lucky Dip” to randomly select 10 numbers on the board, in one go.  Press it more than once, to obtain an entire new selection.</li><li> “Clear Last” and “Clear All” will help you modify the personal or randomly selected numbers one by one, or clear the whole selection.</li></ul><h2>Winning Rules</h2><p>Winnings are paid according to the paytable and depend on how many numbers have been successfully matched with your selects (selects are the numbers you choose before pressing play). Winning payouts are indicated in the paytable on screen, and automatically adjust based on the amount of numbers selected and your play amount.</p><h2>Maximum Liability</h2><p>Cowboy Keno has a maximum prize of 15,000x the play amount for any given play amount cycle.</p><h2>Fairness</h2><ul><li>The outcome of each number chosen in this game is randomly determined in accordance with the advertised rules. The outcome of any set of 20 numbers selected will not affect the outcome of any other selects. This game behaves fairly and has been independently tested.</li><li>The odds of getting a particular outcome are always the same at the start of every game. The odds do not vary based on prior outcomes, play amount size, balance size, numbers selected, etc.</li></ul>",
+    "maxWin": "Max Win"
+  },
+  "modals": {
+    "TEXT_OK": "Ok",
+    "TEXT_CLOSE": "Close",
+    "TEXT_CONTINUE": "Continue",
+    "TEXT_RELOAD": "Reload",
+    "DEPOSIT_BTN": "Deposit",
+    "LOBBY_BTN": "Lobby",
+    "TEXT_GENERIC_ERROR_TITLE": "Apologies",
+    "TEXT_GENERIC_ERROR_TEXT": "It looks like something did not work, but there is no need for concern.Please, reload the game",
+    "TEXT_INSUFFICIENT_FOUNDS_TITLE": "Out of Money",
+    "TEXT_INSUFFICIENT_FOUNDS_LABEL": "Please reduce your bet to continue playing.",
+    "TEXT_ZERO_FOUNDS_LABEL": "Please deposit more money to continue playing.",
+    "TEXT_INSURANCE_ERROR": "Your chosen bets could NOT be accepted at this time due to an inability to secure insurance for jackpot win.",
+    "TEXT_UNSUPORTED_CURRENCY": "Unsuported currency for current player.",
+    "TEXT_APOLOGIES": "Apologies",
+    "TEXT_WEBSOCKET_CLOSED": "Your session has timed out due to inactivity, please refresh by reloading the page.",
+    "TEXT_KICKED_TITLE": "User kicked",
+    "TEXT_KICKED_TEXT": "You were kicked for ",
+    "TEXT_PLACED_BET": "Your bets are placed successfully!",
+    "TEXT_BETTING_OPEN": "Betting Open!",
+    "TEXT_EXTRACTING": "Extracting numbers",
+    "TEXT_PREPARING_DRAW": "Preparing for draw...",
+    "TEXT_BETTING_CLOSED": "Betting Closed",
+    "TEXT_WIN": "You win ",
+    "TEXT_LOSE": "You lose",
+    "TEXT_SUCCESS": "Success"
+  },
+  "history": {
+    "repeatAllBets": "Repeat All Bets",
+    "drawID": "Draw ID",
+    "totalBetsCount": "Total bets count",
+    "totalBetsAmount": "Total bets amoount",
+    "totalBetsWin": "Total Win",
+    "ticketID": "Ticket ID",
+    "bet": "Bet",
+    "win": "Win"
+  },
+  "statistics": {
+    "lastRounds": "Last 20 Rounds",
+    "sort": "Sort"
+  },
+  "leaders": {
+    "displayName": "User",
+    "bet": "Bet",
+    "win": "Win"
+  },
+  "bottom": {
+    "randomQuantity": "Random numbers quantity",
+    "cancel": "Cancel Selection",
+    "random": "Random Selection"
+  },
+  "header": {
+    "clock": "Time"
+  }
+}
