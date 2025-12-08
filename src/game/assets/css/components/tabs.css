@@ -1,0 +1,71 @@
+.tab-menu-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 2px solid var(--tabs-border-color);
+}
+
+.tab-menu-btn {
+  color: var(--tab-btn-textcolor);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.25rem;
+  font-size: 1rem;
+  text-align: center;
+  padding: 0.25rem 0;
+  border-bottom: 3px solid transparent;
+  margin-right: 1rem;
+}
+
+.tab-menu-btn.active {
+  border-bottom: 3px solid var(--tabs-border-color);
+}
+
+.tabs-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  height: 100%;
+}
+
+.tabs-content {
+  flex: 1;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+/** RESULTS */
+.keno-results-item {
+  margin-bottom: 0.25rem;
+  padding: 0.25rem;
+  background-color: rgba(22, 55, 60, 0.4);
+  display: flex;
+  gap: 0.25rem;
+  flex-direction: column;
+}
+
+.keno-results-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+}
+
+.keno-results-item-numbers {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 0.25rem;
+}
+
+.keno-results-item-numbers span {
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  text-align: center;
+  padding: 0.25rem;
+  font-size: 0.8rem;
+}

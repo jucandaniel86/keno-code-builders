@@ -39,7 +39,7 @@ const updateBetIndex = (value: number) => {
       :is-disabled="sidebarDisabled"
     />
 
-    <button>PLACE BET</button>
+    <button class="bet-btn">PLACE BET</button>
 
     <hr />
   </div>

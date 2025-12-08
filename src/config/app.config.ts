@@ -111,3 +111,33 @@ export const SETTINGS_MENU: InfoModalTab[] = [
 ]
 
 export const DEFAULT_TAB = 'info'
+
+export enum KenoGameTabsE {
+  BETS = 'BETS',
+  FUTURE = 'FUTURE',
+  DRAWS = 'DRAWS',
+}
+
+export type KenoGameTabsT = {
+  id: KenoGameTabsE
+  label: string
+  active: boolean
+}
+
+export const KENO_GAME_TABS: KenoGameTabsT[] = [
+  {
+    id: KenoGameTabsE.DRAWS,
+    label: 'tabs.draws',
+    active: true,
+  },
+  {
+    id: KenoGameTabsE.BETS,
+    label: 'tabs.bets',
+    active: true,
+  },
+  {
+    id: KenoGameTabsE.FUTURE,
+    label: 'tabs.future',
+    active: true,
+  },
+]

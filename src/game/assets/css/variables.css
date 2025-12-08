@@ -51,4 +51,8 @@
 
   /** TIMER */
   --progress-bar-bgcolor: #36a386;
+
+  /** TABS **/
+  --tab-btn-textcolor: #b4c2cd;
+  --tabs-border-color: #213743;
 }

@@ -74,5 +74,11 @@
   },
   "header": {
     "clock": "Time"
+  },
+  "tabs": {
+    "bets": "New Bets",
+    "future": "Future Bets",
+    "draws": "Draws",
+    "drawID": "Draw ID"
   }
 }

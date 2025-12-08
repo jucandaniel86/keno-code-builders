@@ -31,3 +31,14 @@
   background: transparent;
   height: 100%;
 }
+
+.bet-btn {
+  background-color: #298f68;
+  border-radius: 0.25rem;
+  padding: 1.5rem;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}

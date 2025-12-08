@@ -7,6 +7,10 @@ import BottomActions from '../components/Game/BottomActions.vue'
 import Timer from '../components/Game/Timer.vue'
 import KenoTop from '../components/Game/KenoTop.vue'
 import Tabs from '../components/Game/tabs/Tabs.vue'
+import { storeToRefs } from 'pinia'
+import { DevicesEnum, useAppStore } from '@/stores/app'
+
+const { device } = storeToRefs(useAppStore())
 </script>
 <template>
   <div class="keno-container">
@@ -26,7 +30,7 @@ import Tabs from '../components/Game/tabs/Tabs.vue'
           <NumbersGrid />
           <BottomActions />
         </div>
-        <div class="keno-play-actions">
+        <div v-if="device === DevicesEnum.DESKTOP" class="keno-play-actions">
           <Bet />
           <Tabs />
         </div>

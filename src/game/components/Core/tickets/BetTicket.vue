@@ -11,7 +11,7 @@ type BetTicketType = {
 }
 //props
 const props = defineProps<BetTicketType>()
-
+console.log('TICKET', props.ticket)
 //composables
 const { t } = useI18n()
 const { isSet } = useUtils()

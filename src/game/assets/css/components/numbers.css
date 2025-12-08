@@ -3,23 +3,25 @@
   display: flex;
   gap: 1.5rem;
   flex-direction: row;
+  height: calc(100% - 1rem);
+  justify-content: flex-end;
+  padding-bottom: 1rem;
 }
 
 .keno-paytable {
-  border: 1px solid #3c515c;
   height: 100%;
   display: flex;
   flex-grow: 1;
   padding: 1rem;
   flex-direction: column;
-  border-radius: var(--base-border-radius);
   gap: 1rem;
+  padding-bottom: 0;
 }
 
 .keno-paytable-numbers-container {
   gap: 0.25rem;
   grid-template-columns: repeat(10, minmax(0, 1fr));
-  flex-grow: 1;
+  flex: 1;
   display: grid;
 }
 
