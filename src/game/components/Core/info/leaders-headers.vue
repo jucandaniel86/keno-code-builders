@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { SortLeaderType } from './leaders.vue'
+import AppIcon from '../../Shared/AppIcon.vue'
 
 //types
 type LeadersHeadersColumn = {
@@ -59,25 +60,15 @@ const setOrder = (_column: string) => {
           <a
             href="#"
             class="winner-sort-btn"
-            :class="{ active: sortOptions.column === column.column }"
+            :class="{
+              active: sortOptions.column === column.column,
+              up: sortOptions.direction === 'ASC' && sortOptions.column === column.column,
+              down: sortOptions.direction !== 'ASC' && sortOptions.column === column.column,
+            }"
             @click.prevent="setOrder(column.column)"
           >
             <span>{{ column.label }}</span>
-            <svg
-              v-if="sortOptions.direction === 'ASC' && sortOptions.column === column.column"
-              width="24"
-              height="24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M23.245 20l-11.245-14.374-11.219 14.374-.781-.619 12-15.381 12 15.391-.755.609z"
-              />
-            </svg>
-            <svg v-else width="24" height="24" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M23.245 4l-11.245 14.374-11.219-14.374-.781.619 12 15.381 12-15.391-.755-.609z"
-              />
-            </svg>
+            <AppIcon icon="arrow" />
           </a>
         </th>
       </tr>

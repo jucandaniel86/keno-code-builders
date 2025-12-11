@@ -15,8 +15,11 @@ import SetupRequestData from './models/setup/SetupRequestData'
 import { useSessionStore } from '@/stores/session'
 import { useStatusStore } from '@/stores/status'
 import type SetupResponseData from './models/setup/SetupResponseData'
-import { useGameStore } from '@/stores/game'
 import BetsRequestData from './models/bets/BetsRequestData'
+import { useLotteryStore } from '@/stores/lottery'
+import BalanceRequestData from './models/balance/BalanceRequestData'
+import { storeToRefs } from 'pinia'
+import { useGameStore } from '@/stores/game'
 
 export default class NetworkController extends Singleton {
   public serverProtocol: string = ''
@@ -146,25 +149,32 @@ export default class NetworkController extends Singleton {
     return finalRequest
   }
 
-  private generateBetData(lines: any): RequestData {
+  private generateBetData(): RequestData {
     const finalRequest = new BetRequestData()
-    const { bet } = useStatusStore()
+    const { selectedNumbers } = storeToRefs(useGameStore())
+    const { bet } = storeToRefs(useStatusStore())
+    const { credit } = storeToRefs(useSessionStore())
+    const { nextDrawNumber, nextTimestamp } = storeToRefs(useLotteryStore())
 
-    const bets = {
-      bet: bet,
-      numbers: lines,
-    }
+    finalRequest.choicesMade = selectedNumbers.value
     finalRequest.sessionID = this.loginRequestData.sessionID
-    finalRequest.gameID = this.loginRequestData.gameID
-    finalRequest.publicState = {
-      action: 'START',
-      payload: {
-        bets: [bets],
-        serId: 'ser.keno.start',
-      },
-    }
+    finalRequest.selections = ['bet', 1]
+    finalRequest.coins = [1]
+    finalRequest.stakes = [bet.value]
+    finalRequest.currency = credit.value?.currency
+    finalRequest.kenoGameType = 'CLASSIC' //@todo
+    finalRequest.nextDrawNumber = nextDrawNumber.value
+    finalRequest.nextTimestamp = nextTimestamp.value
 
-    finalRequest.requestType = 'game'
+    return finalRequest
+  }
+
+  private generateBalanceData(): RequestData {
+    const { getQueryParams } = useUtils()
+    const finalRequest = new BalanceRequestData()
+
+    finalRequest.sessionID = this.loginRequestData.sessionID
+    finalRequest.gameID = getQueryParams('gameID')
 
     return finalRequest
   }
@@ -204,67 +214,30 @@ export default class NetworkController extends Singleton {
     })
   }
 
-  public async setup(): Promise<SetupResponseData> {
+  public async setup(): Promise<SetupResponseData | null> {
     const { isSet } = useUtils()
-    const { setPrizes, setTimer } = useGameStore()
-    if (this.isAuthenticated() === false) {
-      return this.ws
-        .authenticate(this.generateLoginRequest())
-        .then(() => this.ws.requestNextGame(this.generateSetupData() as any))
-        .then((response: any) => {
-          if (isSet(response.lottery.prizes)) {
-            setPrizes(response.lottery.prizes)
-          }
-          if (isSet(response.lottery.drawClosesSeconds)) {
-            setTimer(response.lottery.drawClosesSeconds)
-          }
-
-          if (isSet(response.credit) === true)
-            // GameController.UpdateCreditData(response.credit);
-
-            this.updateSessionID(response.playerDetails)
-          return response
-        })
-    } else {
+    const { setLottery } = useLotteryStore()
+    if (this.isAuthenticated() === true) {
       return this.ws.requestNextGame(this.generateSetupData() as any).then((response: any) => {
-        if (isSet(response.lottery.prizes)) {
-          setPrizes(response.lottery.prizes)
-        }
-        if (isSet(response.lottery.drawClosesSeconds)) {
-          setTimer(response.lottery.drawClosesSeconds)
+        if (isSet(response.lottery)) {
+          setLottery(response.lottery)
         }
 
-        if (isSet(response.credit) === true)
-          // GameController.UpdateCreditData(response.credit);
-
-          this.updateSessionID(response.playerDetails)
+        if (isSet(response.credit) === true) this.updateSessionID(response.playerDetails)
 
         return response
       })
     }
+    return null
   }
 
-  public async bet(lines: any[]): Promise<BetResponseData> {
+  public async bet(): Promise<BetResponseData | null> {
     // const { setGamePlay } = useGameStore()
-    const { isSet } = useUtils()
 
-    if (this.isAuthenticated() === false) {
-      return this.ws
-        .authenticate(this.generateLoginRequest())
-        .then(() => this.ws.requestNextGame(this.generateBetData(lines) as any))
-        .then((response: any) => {
-          if (isSet(response.credit) === true)
-            // GameController.UpdateCreditData(response.credit);
-
-            this.updateSessionID(response.playerDetails)
-
-          return response
-        })
-    } else {
-      return this.ws
-        .requestNextGame(this.generateBetData(lines) as any)
-        .then((response) => response)
+    if (this.isAuthenticated()) {
+      return this.ws.requestNextGame(this.generateBetData() as any)
     }
+    return null
   }
 
   private generateBetsData() {
@@ -278,13 +251,34 @@ export default class NetworkController extends Singleton {
 
   public async bets() {
     const { isSet } = useUtils()
-    const { setHistory } = useGameStore()
+    const { setTickets } = useLotteryStore()
 
     return this.ws.requestBets(this.generateBetsData() as any).then((response) => {
-      console.log('RESPONSE', response)
-      if (isSet(response.lottery.previousDraws)) {
-        setHistory(response.lottery.previousDraws)
+      if (isSet(response.lottery)) {
+        setTickets(response.lottery)
       }
     })
+  }
+
+  public async balance() {
+    const { isSet } = useUtils()
+
+    if (this.isAuthenticated()) {
+      return this.ws.requestBalance(this.generateBalanceData() as any).then((response) => {
+        if (isSet(response.credit) === true) {
+          const { setSessionData } = useSessionStore()
+          const { setStatusData } = useStatusStore()
+
+          setStatusData({
+            credit: response.credit?.amount,
+          })
+
+          setSessionData({
+            credit: response.credit,
+          })
+        }
+      })
+    }
+    return null
   }
 }

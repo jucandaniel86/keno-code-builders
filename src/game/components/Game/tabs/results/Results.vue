@@ -5,8 +5,6 @@ type ResultsTabT = {
   results: ResultItemTicket[]
 }
 const props = defineProps<ResultsTabT>()
-
-console.log('RESULTS', props.results)
 </script>
 <template>
   <div class="results-items-container">

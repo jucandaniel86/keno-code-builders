@@ -1,14 +1,14 @@
-import { useGameStore } from '@/stores/game'
+import { useLotteryStore } from '@/stores/lottery'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 
 export const useHistory = () => {
-  const { history } = storeToRefs(useGameStore())
+  const { futureDraws } = storeToRefs(useLotteryStore())
 
   const tickets = computed(() => {
     const result: any = []
 
-    history.value.forEach((ticket: any) => {
+    futureDraws.value.forEach((ticket: any) => {
       const currentDrawID = ticket.drawNumber
       const currentDrawExists = result.find((element: any) => element.drawNumber === currentDrawID)
 

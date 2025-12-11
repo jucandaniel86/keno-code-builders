@@ -1,10 +1,11 @@
 <!-- eslint-disable @typescript-eslint/ban-ts-comment -->
 <script setup lang="ts">
-import CurrencyConverter from '@/core/core.CurrencyConvertor'
 import { useHistory } from '@/game/composables/useHistory'
 //@ts-ignore
 import { useI18n } from 'vue-i18n'
 import BetTicket from '../tickets/BetTicket.vue'
+import CurrencyConverter from '@/core/core.CurrencyConvertor'
+import AppIcon from '../../Shared/AppIcon.vue'
 
 const { tickets, totalStake, totalWin } = useHistory()
 const { t } = useI18n()
@@ -46,7 +47,7 @@ const { t } = useI18n()
           <button class="repeat-bet-btn">
             <p>{{ t('history.repeatAllBets') }}</p>
             <span class="icon">
-              <i className="fa-sharp fa-solid fa-rotate-right"></i>
+              <AppIcon icon="rotate" />
             </span>
           </button>
         </div>

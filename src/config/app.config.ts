@@ -77,6 +77,7 @@ type InfoModalTab = {
   title: string
   analisis: boolean
   disabled: boolean
+  icon: string
 }
 
 export const SETTINGS_MENU: InfoModalTab[] = [
@@ -86,6 +87,7 @@ export const SETTINGS_MENU: InfoModalTab[] = [
     title: 'HOW TO PLAY',
     analisis: false,
     disabled: false,
+    icon: 'info',
   },
   {
     id: SettingMenuType.HISTORY,
@@ -93,6 +95,7 @@ export const SETTINGS_MENU: InfoModalTab[] = [
     title: 'HISTORY',
     analisis: false,
     disabled: false,
+    icon: 'history',
   },
   {
     id: SettingMenuType.STATISTICS,
@@ -100,6 +103,7 @@ export const SETTINGS_MENU: InfoModalTab[] = [
     title: 'STATISTICS',
     analisis: true,
     disabled: false,
+    icon: 'graph',
   },
   {
     id: SettingMenuType.LEADERS,
@@ -107,6 +111,7 @@ export const SETTINGS_MENU: InfoModalTab[] = [
     title: 'LEADERS',
     analisis: false,
     disabled: false,
+    icon: 'graph-2',
   },
 ]
 
@@ -141,3 +146,10 @@ export const KENO_GAME_TABS: KenoGameTabsT[] = [
     active: true,
   },
 ]
+
+export enum GAME_TYPES_ENUM {
+  CLASSIC = 'CLASSIC',
+  JACKPOT = 'JACKPOT',
+  BONUS = 'BONUS',
+  HOT = 'HEADSORTAILS',
+}

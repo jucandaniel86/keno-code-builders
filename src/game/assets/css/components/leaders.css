@@ -1,8 +1,9 @@
 .leader-item {
-  background: hsla(0, 0%, 100%, 0.8);
+  background: rgba(22, 55, 60, 0.4);
   border-radius: 10px;
   margin-bottom: 2px;
   padding: 10px 5px;
+  color: #fff;
 }
 
 .leader-item table {
@@ -20,4 +21,37 @@
 .leaders-body {
   overflow-y: scroll;
   flex: 1;
+}
+
+.winner-sort-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1rem;
+  gap: 0.5rem;
+}
+
+.winner-sort-btn svg {
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  transition: rotate 0.5s;
+  transform-origin: center;
+}
+
+.winner-sort-btn.up svg {
+  rotate: 180deg;
+}
+
+.winner-sort-btn.active,
+.winner-sort-btn.active svg {
+  color: var(--btn-green-bgcolor);
+}
+
+.winner-sort-btn svg {
+  color: #fff;
+  fill: #fff;
 }

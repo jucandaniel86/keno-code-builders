@@ -12,14 +12,23 @@ import { ref } from 'vue'
 //components
 import Loading from '../../Shared/Loading.vue'
 import Results from './results/Results.vue'
+import Bets from './bets/Bets.vue'
+
+type TabsComponentType = {
+  tabs?: KenoGameTabsE[]
+}
+
+const props = withDefaults(defineProps<TabsComponentType>(), {
+  tabs: () => [KenoGameTabsE.DRAWS, KenoGameTabsE.FUTURE],
+})
 
 //models
-const allowedTabs = [KenoGameTabsE.DRAWS, KenoGameTabsE.FUTURE]
+const allowedTabs = props.tabs
 const { analisis, analisisLoading } = storeToRefs(useGameStore())
-const tabs = ref<KenoGameTabsT[]>(
+const currentTabs = ref<KenoGameTabsT[]>(
   KENO_GAME_TABS.filter((tab) => allowedTabs.indexOf(tab.id) !== -1),
 )
-const currentTab = ref<KenoGameTabsT>(tabs.value[0] as any)
+const currentTab = ref<KenoGameTabsT>(currentTabs.value[0] as any)
 
 //composables
 const { t } = useI18n()
@@ -31,7 +40,7 @@ const onTabChange = (tab: KenoGameTabsT) => (currentTab.value = tab)
   <div class="tabs-wrapper">
     <div class="tab-menu-container">
       <button
-        v-for="tab in tabs"
+        v-for="tab in currentTabs"
         :key="tab.id"
         class="tab-menu-btn"
         @click.prevent="onTabChange(tab)"
@@ -44,8 +53,12 @@ const onTabChange = (tab: KenoGameTabsT) => (currentTab.value = tab)
       </button>
     </div>
     <div class="tabs-content">
-      <Loading v-if="analisisLoading" />
-      <Results v-if="analisis.statistics.draws" :results="analisis.statistics.draws" />
+      <Loading v-if="analisisLoading && currentTab.id === KenoGameTabsE.DRAWS" />
+      <Results
+        v-if="analisis.statistics.draws && currentTab.id === KenoGameTabsE.DRAWS"
+        :results="analisis.statistics.draws"
+      />
+      <Bets v-if="currentTab.id === KenoGameTabsE.BETS" />
     </div>
   </div>
 </template>

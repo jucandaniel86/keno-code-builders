@@ -54,5 +54,13 @@
 
   /** TABS **/
   --tab-btn-textcolor: #b4c2cd;
-  --tabs-border-color: #213743;
+  --tabs-border-color: #0f212e;
+
+  /* SETTINGS */
+  --settings-modal-bg: #244c5d;
+  --settings-desp-bgcolor: #1f3646;
+  --settings-text-content-color: #fff;
+  --settings-btn-color: #1f3646;
+
+  --ball-tex: none;
 }

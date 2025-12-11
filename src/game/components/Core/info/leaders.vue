@@ -1,12 +1,14 @@
 <!-- eslint-disable @typescript-eslint/ban-ts-comment -->
 <script setup lang="ts">
-import CurrencyConverter from '@/core/core.CurrencyConvertor'
+import CurrencyConverter from '../../../../core/core.CurrencyConvertor'
 import HttpConnection from '@/core/core.HttpConnection'
 import { useUtils } from '@/core/core.Util'
 import { computed, onMounted, ref } from 'vue'
 //@ts-ignore
 import { useI18n } from 'vue-i18n'
 import LeadersHeaders from './leaders-headers.vue'
+
+import Loading from '../../Shared/Loading.vue'
 
 //types
 export type WinnerType = {
@@ -117,7 +119,7 @@ onMounted(() => {
 </script>
 <template>
   <div style="height: 100%">
-    <p v-if="loading">Loading</p>
+    <Loading v-if="loading" />
     <div className="leaders-container" v-else>
       <div className="leaders-header">
         <LeadersHeaders

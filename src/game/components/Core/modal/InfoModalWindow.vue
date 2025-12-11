@@ -9,7 +9,7 @@ const props = defineProps<{ title: string; content: string; buttons?: any[] }>()
       <h2>{{ props.title || 'Warning' }}</h2>
     </div>
 
-    <div class="modal-content game-info">
+    <div class="modal-content">
       <p>{{ props.content }}</p>
     </div>
 

@@ -1,7 +1,7 @@
 .modal-settings {
   width: 100%;
   height: 100%;
-  background-color: #fff;
+  background-color: var(--settings-modal-bg);
   display: flex;
   z-index: 999;
 }
@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border-left: 10px solid #ccc;
+  border-left: 10px solid var(--settings-desp-bgcolor);
 }
 
 .modal-settings-right > * {
@@ -33,13 +33,50 @@
 
 .close-btn {
   cursor: pointer;
-  border-radius: 50%;
   padding: 0.5rem;
   position: absolute;
   top: 1rem;
   left: 1rem;
+  background: none;
+  border: none;
+}
+
+.close-btn svg {
+  width: 40px;
+  height: 40px;
+  color: #fff;
 }
 
 .modal-title {
   text-align: center;
+  color: #fff;
+}
+
+.settings-btn {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--settings-btn-color);
+  background: rgba(255, 255, 255, 0.6);
+  border-bottom: 2px solid var(--settings-btn-color);
+}
+
+.settings-btn svg {
+  color: var(--settings-btn-color);
+  width: 40px;
+  height: 40px;
+}
+
+.settings-btn.selected {
+  background-color: var(--btn-green-bgcolor);
+}
+
+.settings-btn.selected svg {
+  color: #fff;
 }

@@ -9,10 +9,17 @@ import type ErrorData from './models/ErrorData'
 import HearthBeatRequestData from './models/heartbeat/HeartbeatRequestData'
 import type LoginRequestData from './models/login/LoginRequestData'
 import type LoginResponseData from './models/login/LoginResponseData'
-import { GameStates, useGameStore } from '@/stores/game'
-import ModalController from './core.ModalController'
+import { useGameStore } from '@/stores/game'
 import type BetsRequestData from './models/bets/BetsRequestData'
 import type BetsResponseData from './models/bets/BetsResponseData'
+import { useLotteryStore } from '@/stores/lottery'
+import type BalanceRequestData from './models/balance/BalanceRequestData'
+import type BalanceResponseData from './models/balance/BalanceResponseData'
+
+enum BROADCAST_RESPONSE_TYPES {
+  CLOSE = 'close',
+  RESULTS = 'results',
+}
 
 export default class WebsocketConnector extends Logger {
   public disconnectedCallback!: () => void
@@ -151,6 +158,11 @@ export default class WebsocketConnector extends Logger {
     })
   }
 
+  /**
+   *
+   * @param request
+   * @returns
+   */
   public async authenticate(request: LoginRequestData): Promise<LoginResponseData> {
     const { isSet } = useUtils()
     return this.serverRequest<LoginRequestData, LoginResponseData>(request).then(
@@ -165,11 +177,30 @@ export default class WebsocketConnector extends Logger {
     )
   }
 
+  /**
+   *
+   * @param request
+   * @returns
+   */
   public async requestNextGame(request: BetRequestData): Promise<BetResponseData> {
     return this.serverRequest<BetRequestData, BetResponseData>(request)
   }
 
+  /**
+   *
+   * @param request
+   * @returns
+   */
   public async requestBets(request: BetsRequestData): Promise<BetsResponseData> {
+    return this.serverRequest(request)
+  }
+
+  /**
+   *
+   * @param request
+   * @returns
+   */
+  public async requestBalance(request: BalanceRequestData): Promise<BalanceResponseData> {
     return this.serverRequest(request)
   }
 
@@ -188,7 +219,7 @@ export default class WebsocketConnector extends Logger {
           const heartbeatData = new HearthBeatRequestData()
           heartbeatData.gameID = getQueryParams('gameID') as any
           heartbeatData.funReal = getQueryParams('funReal') as any
-          heartbeatData.sessionID = getQueryParams('playToken') as any
+          heartbeatData.sessionID = this.sessionID
           this.serverRequest(heartbeatData)
         }
 
@@ -205,40 +236,23 @@ export default class WebsocketConnector extends Logger {
   private getBroadcast() {
     this.webSocket!.addEventListener('message', (message: any) => {
       const messageData = JSON.parse(message.data)
-      const { setGamePlay } = useGameStore()
+      const { setLottery } = useLotteryStore()
+      const { setResults } = useGameStore()
+      const { isSet } = useUtils()
 
-      if (messageData.requestType === 'broadcast') {
+      if (isSet(messageData.broadcast)) {
         this._logBroadcast(messageData)
 
-        switch (messageData.updateType) {
-          case 'KICK': {
-            return ModalController.Instance().kicked(messageData.reason)
-          }
-          case 'TIMER':
-            {
-              const currentFeature = this.getCurrentFeature(messageData.publicView.features)
-              const playerView = messageData.playerView
-              if (currentFeature) {
-                setGamePlay({
-                  state: currentFeature.state,
-                  room: currentFeature.id,
-                  tickets: playerView.tickets,
-                })
-
-                switch (currentFeature.state) {
-                  case GameStates.BETTING:
-                  // return setTimer(currentFeature.secsToExtr)
-                  case GameStates.EXTRACTING:
-                    {
-                      setGamePlay({
-                        totalWin: playerView.totalWin,
-                        extractedNumbers: currentFeature.turn.extractedNumbers,
-                      })
-                    }
-                    break
-                }
-              }
-            }
+        switch (messageData.broadcast.requestType) {
+          case BROADCAST_RESPONSE_TYPES.CLOSE:
+            setLottery({ bettingOpen: false })
+            break
+          case BROADCAST_RESPONSE_TYPES.RESULTS:
+            setResults(messageData.broadcast.lottery.numbers)
+            setLottery({
+              drawNumber: messageData.broadcast.lottery.drawNumber,
+              nextDrawNumber: messageData.broadcast.lottery.nextDrawNumber,
+            })
             break
         }
       }

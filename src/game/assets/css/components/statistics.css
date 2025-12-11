@@ -14,12 +14,14 @@
 
 .keno-statistics-header-item {
   font-weight: bold;
+  color: #fff;
 }
 
 .keno-statistics-body {
   flex: 1;
   overflow-y: scroll;
   overflow-x: hidden;
+  padding-bottom: 1rem;
 }
 
 .keno-statistics-row {
@@ -34,12 +36,11 @@
 
 .keno-statistics-ball {
   align-items: center;
-  background: #ff0000;
+  background: var(--btn-green-bgcolor);
   border-radius: 100%;
   color: #fff;
   display: inline-flex;
-  font-family: Poppins;
-  font-size: 14px;
+  font-size: 1rem;
   font-weight: 500;
   height: 34px;
   justify-content: center;
@@ -52,10 +53,9 @@
 .keno-statistics-percentage,
 .keno-statistics-line-container {
   align-items: center;
-  color: #2b2b2b;
+  color: #fff;
   display: inline-flex;
-  font-family: Poppins;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-weight: 500;
   justify-content: flex-start;
   padding: 0.5em;
@@ -70,5 +70,29 @@
 .keno-statistics-line {
   background: linear-gradient(270deg, #5a9c3b, #ffba53);
   border-radius: 5px;
-  height: 10px;
+  height: 1rem;
+}
+
+.statistics-sort-btn {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font-size: 1rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  transition: rotate 0.25ms;
+  transform-origin: center;
+}
+
+.statistics-sort-btn svg {
+  transition: all 0.5s;
+  width: 20px;
+  height: 25px;
+}
+
+.statistics-sort-btn.active svg {
+  rotate: 180deg;
 }

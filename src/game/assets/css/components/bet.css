@@ -1,6 +1,4 @@
 .keno-bet-options {
-  background-color: var(--paytable-bg-color);
-  border-radius: var(--md-radius);
   padding: var(--small-padding);
 }
 
@@ -15,11 +13,16 @@
   width: 100%;
   display: flex;
   flex-shrink: 0;
-  box-shadow: var(--stake-selector-boxshadow);
-  border-radius: var(--md-radius);
-  background-color: #2f4553;
   height: 44px;
   margin-bottom: 1rem;
+  justify-content: flex-start !important;
+}
+
+.stake-container {
+  color: #fff;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
 }
 
 .input-wrapper {
@@ -30,6 +33,8 @@
 .input-wrapper input {
   background: transparent;
   height: 100%;
+  font-size: 1.2rem;
+  color: #fff;
 }
 
 .bet-btn {
@@ -41,4 +46,17 @@
   text-align: center;
   cursor: pointer;
   width: 100%;
+}
+
+.stake-btn {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.stake-btn svg {
+  color: var(--btn-green-bgcolor);
+  width: 30px;
+  height: 30px;
+  fill: var(--btn-green-bgcolor);
 }

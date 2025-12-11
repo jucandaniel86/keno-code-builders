@@ -9,6 +9,7 @@ import KenoTop from '../components/Game/KenoTop.vue'
 import Tabs from '../components/Game/tabs/Tabs.vue'
 import { storeToRefs } from 'pinia'
 import { DevicesEnum, useAppStore } from '@/stores/app'
+import { KenoGameTabsE } from '@/config/app.config'
 
 const { device } = storeToRefs(useAppStore())
 </script>
@@ -18,8 +19,7 @@ const { device } = storeToRefs(useAppStore())
       <Logo />
       <Prizes />
       <div class="draws-history">
-        <h2>Draws History</h2>
-        <div>content....</div>
+        <Tabs :tabs="[KenoGameTabsE.BETS]" />
       </div>
     </div>
     <div class="keno-right-container">

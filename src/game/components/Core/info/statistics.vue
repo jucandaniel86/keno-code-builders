@@ -2,6 +2,8 @@
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
+import AppIcon from '../../Shared/AppIcon.vue'
+
 const props = defineProps({
   draws: {
     type: Array,
@@ -56,11 +58,9 @@ const statistics = computed((): any => {
         {{ t('statistics.lastRounds') }}
       </div>
       <div cllass="keno-statistics-header-item">
-        <button @click.prevent="toggleSort">
+        <button @click.prevent="toggleSort" class="statistics-sort-btn" :class="{ active: sort }">
           {{ t('statistics.sort') }}
-          <span className="sortIcon">
-            {{ sort ? 'active' : 'disabled' }}
-          </span>
+          <AppIcon icon="arrow" />
         </button>
       </div>
     </div>

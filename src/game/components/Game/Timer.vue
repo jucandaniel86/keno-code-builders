@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { BETTING_WARNING_SECONDS } from '@/config/app.config'
-import { useGameStore } from '@/stores/game'
+import { useLotteryStore } from '@/stores/lottery'
 import { storeToRefs } from 'pinia'
 import { computed, onMounted, ref } from 'vue'
 
-const { timer } = storeToRefs(useGameStore())
+const { nextDrawSeconds, drawNumber } = storeToRefs(useLotteryStore())
 const TOTAL_SECONDS = 150
 const interval = ref()
 const warning = ref<boolean>(false)
-const localTimer = ref(timer.value)
+const localTimer = ref(nextDrawSeconds.value)
 
 onMounted(() => {
   interval.value = setInterval(() => {
@@ -29,7 +29,7 @@ const progressBarWidth = computed(() => {
 })
 
 const timerSeconds = computed(() => {
-  const minutes = Math.floor(timer.value / 60)
+  const minutes = Math.floor(nextDrawSeconds.value / 60)
   const seconds = localTimer.value - minutes * 60
 
   const lMinutes = String(minutes).length === 1 ? `0${minutes}` : minutes
@@ -43,7 +43,7 @@ const timerSeconds = computed(() => {
     <div class="timer-draw-details">
       <span>KENO</span>
       <span>CLASSIC</span>
-      <span class="draw-number">#4893567</span>
+      <span class="draw-number">#{{ drawNumber }}</span>
     </div>
     <div class="timer-progress-wrapper">
       <span class="timer-seconds" :class="{ betwarning: warning }">{{ timerSeconds }}</span>

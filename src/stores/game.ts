@@ -1,8 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { GAME_NAME } from '@/config/app.config'
+import { GAME_NAME, GAME_TYPES_ENUM } from '@/config/app.config'
 import p from '../../package.json'
-import type { PrizeData } from '@/core/models/setup/SetupResponseData'
 // import SoundManager from '@/core/core.Sounds'
 // import { useSettingsStore } from './settings'
 // import { useTicketHistory } from '@/composables/useTicketHistory'
@@ -80,14 +79,14 @@ export const useGameStore = defineStore('game', () => {
 
   const disableInteraction = ref<boolean>(false)
 
-  const gameMode = ref<GameModeType>(GameModeType.MANUAL)
-
   const history = ref<any>()
   const draws = ref<DrawTypeType[]>()
 
+  const gameType = ref<GAME_TYPES_ENUM>(GAME_TYPES_ENUM.CLASSIC)
+
   const displayResults = ref<boolean>(false)
 
-  const results = ref<GameResultsType>()
+  const results = ref<number[]>()
 
   const resultsHistory = ref<PastResultType[]>([])
 
@@ -95,13 +94,9 @@ export const useGameStore = defineStore('game', () => {
 
   const winningNumbers = ref<number[]>([])
 
-  const prizes = ref<PrizeData[]>([])
-
   const analisis = ref<AnalisisType>({ hot: [], cold: [], statistics: {} })
 
   const analisisLoading = ref<boolean>(false)
-
-  const timer = ref<number>(0)
 
   const setGamePlay = (_payload: any) => {
     game.value = {
@@ -109,8 +104,6 @@ export const useGameStore = defineStore('game', () => {
       ..._payload,
     }
   }
-
-  const setTimer = (sec: number) => (timer.value = sec)
 
   const setDisplayResults = (_payload: boolean) => (displayResults.value = _payload)
 
@@ -132,8 +125,8 @@ export const useGameStore = defineStore('game', () => {
     disableInteraction.value = _payload
   }
 
-  const setGameType = (_payload: GameModeType) => {
-    gameMode.value = _payload
+  const setGameType = (_payload: GAME_TYPES_ENUM) => {
+    gameType.value = _payload
   }
 
   const setResultsHistory = (_result: PastResultType) => {
@@ -182,25 +175,19 @@ export const useGameStore = defineStore('game', () => {
     // })
   }
 
-  const setPrizes = (_prizes: PrizeData[]) => {
-    prizes.value = _prizes
-  }
-
   return {
     game,
     history,
     draws,
     selectedNumbers,
     disableInteraction,
-    gameMode,
+    gameType,
     displayResults,
     results,
     resultsHistory,
     sidebarDisabled,
     winningNumbers,
-    prizes,
     analisis,
-    timer,
     analisisLoading,
     disableSidebar,
     setGamePlay,
@@ -214,8 +201,6 @@ export const useGameStore = defineStore('game', () => {
     setResultsHistory,
     setWinningNumbers,
     clearWinningNumbers,
-    setPrizes,
     setAnalisys,
-    setTimer,
   }
 })

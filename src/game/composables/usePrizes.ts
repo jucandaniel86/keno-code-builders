@@ -1,5 +1,6 @@
 import { useUtils } from '@/core/core.Util'
 import { useGameStore } from '@/stores/game'
+import { useLotteryStore } from '@/stores/lottery'
 import { storeToRefs } from 'pinia'
 import { ref, watch } from 'vue'
 
@@ -7,7 +8,8 @@ export const usePrizes = () => {
   //models
   const currentPrizes = ref<any[]>([])
   //composables
-  const { prizes, selectedNumbers } = storeToRefs(useGameStore())
+  const { prizes } = storeToRefs(useLotteryStore())
+  const { selectedNumbers } = storeToRefs(useGameStore())
 
   //methods
   const extractCurrentPrize = () => {

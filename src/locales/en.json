@@ -22,6 +22,8 @@
     "maxWin": "Max Win"
   },
   "modals": {
+    "TEXT_INVALID_NUMBERS": "Please choose your combination",
+    "TEXT_INVALID_COMBINATION": "1-10, 15, 20 or 40 NUMBERS MUST  BE SELECTED TO PLAY",
     "TEXT_OK": "Ok",
     "TEXT_CLOSE": "Close",
     "TEXT_CONTINUE": "Continue",
@@ -79,6 +81,9 @@
     "bets": "New Bets",
     "future": "Future Bets",
     "draws": "Draws",
-    "drawID": "Draw ID"
+    "drawID": "Draw ID",
+    "ticketID": "Ticket ID",
+    "stake": "Stake",
+    "bet": "Bet"
   }
 }

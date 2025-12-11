@@ -7,6 +7,7 @@ import { DEFAULT_TAB, SettingMenuType, SETTINGS_MENU } from '@/config/app.config
 import Info from '../info/Info.vue'
 import History from '../info/history.vue'
 import Statistics from '../info/statistics.vue'
+import AppIcon from '../../Shared/AppIcon.vue'
 //store
 import { useGameStore } from '../../../../stores/game'
 import useModalStore from '../../../../stores/modal'
@@ -33,7 +34,9 @@ const activeTab = computed(() =>
 <template>
   <div class="modal-settings">
     <div class="modal-settings-left">
-      <button @click.prevent="closeModal" class="close-btn">CLOSE</button>
+      <button @click.prevent="closeModal" class="close-btn">
+        <AppIcon icon="close" />
+      </button>
       <h1 v-if="activeTab" class="modal-title">{{ activeTab.title }}</h1>
 
       <Info v-if="activeTab && activeTab.id === SettingMenuType.INFO" />
@@ -51,11 +54,12 @@ const activeTab = computed(() =>
       <button
         v-for="setting in settings_menu"
         :key="`menu-${setting.id}`"
+        class="settings-btn"
         :class="{ selected: defaultTab === setting.id }"
         @click.prevent="handleTabClick(setting.id)"
-        style="cursor: pointer"
         :disabled="setting.analisis && !isSet(analisis.statistics.draws)"
       >
+        <AppIcon :icon="setting.icon" />
         {{ setting.label }}
       </button>
     </div>

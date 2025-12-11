@@ -2,8 +2,9 @@
 import { MAX_RANDOM_BALL } from '@/config/app.config'
 import { useGameStore } from '@/stores/game'
 import { storeToRefs } from 'pinia'
+import Draw from './draw/Draw.vue'
 
-const { selectedNumbers, analisis } = storeToRefs(useGameStore())
+const { selectedNumbers, analisis, results } = storeToRefs(useGameStore())
 
 const onClickHandler = (ball: number) => {
   const findIndex = selectedNumbers.value.findIndex((_ball) => _ball === ball)
@@ -15,9 +16,12 @@ const onClickHandler = (ball: number) => {
 
   selectedNumbers.value = [...selectedNumbers.value, ball]
 }
+
+const customResults = [10, 55, 2, 5, 6, 12, 66, 45, 12]
 </script>
 <template>
   <div class="keno-paytable-numbers-container">
+    <Draw v-if="customResults" :results="customResults" />
     <button
       v-for="n in MAX_RANDOM_BALL"
       :key="`Number${n}`"

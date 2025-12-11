@@ -4,6 +4,7 @@ import { useUtils } from '@/core/core.Util'
 import type { TicketType } from '@/core/models/bets/BetsResponseData'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import AppIcon from '../../Shared/AppIcon.vue'
 
 //types
 type BetTicketType = {
@@ -11,7 +12,7 @@ type BetTicketType = {
 }
 //props
 const props = defineProps<BetTicketType>()
-console.log('TICKET', props.ticket)
+
 //composables
 const { t } = useI18n()
 const { isSet } = useUtils()
@@ -47,12 +48,12 @@ const getBallClasses = (_number: number) => {
           </span>
         </span>
 
-        <div>
+        <div class="history-ticket-buttons">
           <span className="label-bet-type" v-if="props.ticket.kenoGameType !== 'HEADSORTAILS'">
             {{ props.ticket.kenoGameType }}
           </span>
           <button className="HistoryTicketIcon" v-if="isSet(props.ticket.drawResults)">
-            <i className="fa-sharp fa-solid fa-rotate-right"></i>
+            <AppIcon icon="rotate" />
           </button>
         </div>
       </div>

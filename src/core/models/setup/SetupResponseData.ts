@@ -1,20 +1,8 @@
+import type { PrizeType } from '@/stores/lottery'
 import type CreditData from '../CreditData'
 import type ErrorData from '../ErrorData'
 import ResponseData from '../ResponseData'
 
-type PrizeItem = {
-  lose: boolean
-  matches: number[]
-  winMultiplier: number
-  jackpot?: boolean
-  jackpotPrizes?: number[]
-}
-
-export type PrizeData = {
-  selections: number
-  bonusLevels: string
-  items: PrizeItem[]
-}
 export default class SetupResponseData extends ResponseData {
   public error!: ErrorData
   public requestType: string = ''
@@ -28,7 +16,7 @@ export default class SetupResponseData extends ResponseData {
   public nextDrawNumber: number = 0
   public nextDrawSeconds: number = 0
   public nextTimestamp: string = ''
-  public prizes?: PrizeData[]
+  public prizes?: PrizeType[]
 }
 
 /**

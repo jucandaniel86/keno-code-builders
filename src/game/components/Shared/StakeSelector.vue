@@ -3,6 +3,8 @@ import CurrencyConverter from '@/core/core.CurrencyConvertor'
 import SoundManager from '@/core/core.Sounds'
 import { defineProps, ref, watch } from 'vue'
 
+import AppIcon from './AppIcon.vue'
+
 type StakeSelectorType = {
   title?: string
   isDisabled?: boolean
@@ -48,7 +50,7 @@ watch(props, () => {
         class="default transition stake-btn"
         @click.prevent="decrease"
       >
-        -
+        <AppIcon icon="minus" />
       </button>
       <div class="input-wrapper">
         <input
@@ -56,40 +58,16 @@ watch(props, () => {
           readonly
           class="stake-value"
           :disabled="isDisabled"
-          :value="CurrencyConverter.Convert(props.options[currentOption] as number, true, false)"
+          :value="CurrencyConverter.Convert(props.options[currentOption] as number, true)"
         />
-        {{ CurrencyConverter.getCurrency() }}
       </div>
       <button
         :disabled="isDisabled || currentOption + 1 === options.length"
-        class="default transition stake-btn up"
+        class="stake-btn"
         @click.prevent="increase"
       >
-        +
+        <AppIcon icon="plus" />
       </button>
     </div>
   </label>
 </template>
-<style scoped>
-.stake-btn .dropdown-icon {
-  width: 16px;
-  height: 16px;
-  display: block;
-}
-.stake-btn:hover .dropdown-icon {
-  color: var(--text-color);
-  background-color: var(--text-color);
-}
-
-.stake-btn.up .dropdown-icon {
-  transform: rotate(180deg);
-}
-
-.stake-btn:disabled {
-  opacity: 0.4;
-  cursor: none;
-}
-.stake-value:-webkit-inner-spin-button {
-  display: none;
-}
-</style>

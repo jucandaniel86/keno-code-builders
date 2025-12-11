@@ -28,7 +28,7 @@
   flex-direction: column;
   gap: 0.5rem;
   flex: 1;
-  height: 100%;
+  overflow: hidden;
 }
 
 .tabs-content {
@@ -36,9 +36,14 @@
   overflow-y: scroll;
   overflow-x: hidden;
   height: 100%;
+  position: relative;
 }
 
 /** RESULTS */
+.results-items-container {
+  position: absolute;
+  width: 100%;
+}
 .keno-results-item {
   margin-bottom: 0.25rem;
   padding: 0.25rem;
@@ -46,6 +51,7 @@
   display: flex;
   gap: 0.25rem;
   flex-direction: column;
+  width: 100%;
 }
 
 .keno-results-item-header {
@@ -67,5 +73,41 @@
   border-radius: 50%;
   text-align: center;
   padding: 0.25rem;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 /1;
+}
+
+.HistoryNewBetsContainer {
+  overflow-y: scroll;
+  flex: 1;
+  height: 100%;
+}
+
+.BetTicket {
+  background: rgba(22, 55, 60, 0.8);
+  border-left: 2px solid #fbc94a;
+  margin-bottom: 0.25em;
+  padding: 0.25em 0.5em;
+  position: relative;
+}
+
+.BetTicketHeaderType {
+  background-color: #fbc94a;
+  padding: 0.25rem;
+  color: #fff;
+  width: fit-content;
+  margin-left: -0.5em;
+  margin-top: -0.25em;
+}
+
+.BetTicketHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  margin: 0.25rem 0;
   font-size: 0.8rem;
 }
