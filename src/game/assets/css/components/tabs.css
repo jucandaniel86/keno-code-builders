@@ -111,3 +111,61 @@
   margin: 0.25rem 0;
   font-size: 0.8rem;
 }
+
+.keno-bets-table-mobile {
+  width: 100%;
+  border-collapse: collapse;
+  color: #a795af;
+}
+
+.keno-bets-table-mobile thead {
+  display: flex;
+  width: 100%;
+}
+
+.keno-bets-table-mobile tbody {
+  overflow-y: scroll;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.keno-bets-table-mobile tbody tr {
+  margin-bottom: 1px;
+  width: 100%;
+  display: flex;
+}
+.keno-bets-table-mobile td {
+  padding: var(--md-padding);
+  background-color: rgba(74, 50, 75, 0.6);
+  flex: 1;
+}
+.keno-bets-table-mobile thead tr {
+  display: flex;
+  width: 100%;
+}
+
+.keno-bets-table-mobile thead th {
+  flex: 1;
+}
+
+.keno-bets-table-mobile tbody tr.CLASSIC {
+  border-left: 2px solid var(--keno-type-classic-color);
+}
+
+@media (max-width: 641px) {
+  .tab-menu-btn {
+    color: var(--tab-btn-mobile-textcolor);
+  }
+  .tab-menu-container {
+    padding-top: var(--small-padding);
+    padding-left: var(--small-padding);
+    padding-right: var(--small-padding);
+    border-bottom: 2px solid var(--tabs-border-mobile-color);
+  }
+  .tab-menu-btn.active {
+    border-bottom: 3px solid var(--tabs-border-mobile-color);
+    color: #fff;
+  }
+}

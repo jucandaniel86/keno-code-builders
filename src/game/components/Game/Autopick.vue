@@ -45,21 +45,26 @@ watch(currentIndex, () => {
 <template>
   <div class="keno-autopick">
     <div class="keno-autopick-wrapper">
-      <button
-        class="keno-autopick-btn keno-autopick-prev"
-        :disabled="props.disabled"
-        @click.prevent="prev"
-      >
-        <AppIcon icon="arrow" fill="#fff" />
-      </button>
+      <div>
+        <button
+          class="keno-autopick-btn keno-autopick-prev"
+          :disabled="props.disabled"
+          @click.prevent="prev"
+        >
+          <AppIcon icon="arrow" fill="#fff" />
+        </button>
+      </div>
+
       <span class="keno-autopick-number">{{ currentNumber }}</span>
-      <button
-        class="keno-autopick-btn keno-autopick-next"
-        :disabled="props.disabled"
-        @click.prevent="next"
-      >
-        <AppIcon icon="arrow" fill="#fff" />
-      </button>
+      <div>
+        <button
+          class="keno-autopick-btn keno-autopick-next"
+          :disabled="props.disabled"
+          @click.prevent="next"
+        >
+          <AppIcon icon="arrow" fill="#fff" />
+        </button>
+      </div>
     </div>
     <p class="keno-autopick-label">{{ t('bottom.randomQuantity') }}</p>
   </div>

@@ -1,0 +1,8 @@
+.mobile-actions-container {
+  display: flex;
+  background: #462b3e;
+  background: linear-gradient(180deg, rgba(70, 43, 62, 1) 0%, rgba(0, 0, 0, 1) 100%);
+  flex-direction: column;
+  margin: -0.5rem;
+  flex: 1;
+}

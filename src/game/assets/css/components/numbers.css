@@ -76,3 +76,21 @@
     1px 1px 10px #fff,
     1px 1px 10px #ccc;
 }
+
+@media (max-width: 641px) {
+  .keno-paytable {
+    width: 100%;
+    padding: var(--small-radius);
+  }
+  .keno-main-container {
+    padding-bottom: 0;
+  }
+  .keno-number {
+    background-color: transparent;
+    border: none;
+    aspect-ratio: 1 / 1;
+  }
+  .keno-number.selected {
+    border: none;
+  }
+}

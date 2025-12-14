@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import CurrencyConverter from '@/core/core.CurrencyConvertor'
 import SoundManager from '@/core/core.Sounds'
-import { defineProps, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 
 import AppIcon from './AppIcon.vue'
 
 type StakeSelectorType = {
-  title?: string
+  title?: string | null
   isDisabled?: boolean
   selectedOption?: number
   options: number[]
@@ -43,7 +43,7 @@ watch(props, () => {
 </script>
 <template>
   <label class="stake-container">
-    <span>{{ props.title }}</span>
+    <span v-if="title">{{ props.title }}</span>
     <div class="input-wrap">
       <button
         :disabled="isDisabled || currentOption === 0"

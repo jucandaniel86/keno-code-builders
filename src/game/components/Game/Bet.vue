@@ -5,9 +5,10 @@ import { useI18n } from 'vue-i18n'
 import { useSessionStore } from '@/stores/session'
 import { useStatusStore } from '@/stores/status'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import StakeSelector from '../Shared/StakeSelector.vue'
 import { usePlaceBet } from '@/game/composables/usePlaceBet'
+import { DevicesEnum, useAppStore } from '@/stores/app'
 
 //composables
 const { t } = useI18n()
@@ -36,11 +37,16 @@ const handlePlaceBet = async () => {
   await placeBet()
   betLoading.value = false
 }
+
+const { device } = storeToRefs(useAppStore())
+const stakeSelectorLabel = computed(() => {
+  return device.value === DevicesEnum.DESKTOP ? t('components.sidebar.betAmount') : null
+})
 </script>
 <template>
   <div class="keno-bet-options">
     <StakeSelector
-      :title="t('components.sidebar.betAmount')"
+      :title="stakeSelectorLabel"
       :options="betLevels"
       @stake-selector:increase="updateBetIndex"
       @stake-selector:decrease="updateBetIndex"

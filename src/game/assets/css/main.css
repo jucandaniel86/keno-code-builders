@@ -51,6 +51,7 @@ body {
   overflow-y: auto;
   background-color: var(--left-container-bgcolor);
   padding: 0 1rem;
+  min-width: 240px;
 }
 
 .keno-right-container {
@@ -109,4 +110,27 @@ button:disabled {
 .d-flex {
   display: flex;
   gap: 0.5rem;
+}
+
+@media (max-width: 961px) {
+  body,
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 641px) {
+  .keno-right-container {
+    width: 100%;
+    padding: var(--md-padding);
+  }
+}
+
+#app {
+  transform: all;
+}
+
+#app.resize {
+  filter: blur(5px);
+  background: #000;
 }

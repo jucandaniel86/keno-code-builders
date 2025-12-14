@@ -131,11 +131,6 @@ export type KenoGameTabsT = {
 
 export const KENO_GAME_TABS: KenoGameTabsT[] = [
   {
-    id: KenoGameTabsE.DRAWS,
-    label: 'tabs.draws',
-    active: true,
-  },
-  {
     id: KenoGameTabsE.BETS,
     label: 'tabs.bets',
     active: true,
@@ -143,6 +138,11 @@ export const KENO_GAME_TABS: KenoGameTabsT[] = [
   {
     id: KenoGameTabsE.FUTURE,
     label: 'tabs.future',
+    active: true,
+  },
+  {
+    id: KenoGameTabsE.DRAWS,
+    label: 'tabs.draws',
     active: true,
   },
 ]

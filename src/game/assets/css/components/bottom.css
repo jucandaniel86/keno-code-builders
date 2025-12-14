@@ -36,6 +36,7 @@
   background: none;
   border: none;
   cursor: pointer;
+  display: flex;
 }
 
 .keno-autopick-number {
@@ -94,4 +95,19 @@
 
 .random-selection-btn svg {
   color: var(--btn-green-bgcolor);
+}
+
+@media (max-width: 641px) {
+  .keno-bottom-actions-container {
+    flex: 1;
+    padding: 0;
+  }
+  .keno-bottom-actions-container > * {
+    justify-content: center;
+  }
+  .keno-autopick-wrapper > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

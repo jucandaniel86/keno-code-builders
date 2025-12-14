@@ -19,6 +19,10 @@
   padding: 1rem 0;
 }
 
+.keno-game-types-mobile {
+  padding: var(--md-padding);
+}
+
 .clock-wrapper {
   display: flex;
   gap: 0.5rem;
@@ -44,4 +48,10 @@
 .keno-type-btn.active {
   border-bottom: 2px solid var(--btn-green-bgcolor);
   color: var(--btn-green-bgcolor);
+}
+
+@media (max-width: 641px) {
+  .draw-info-details {
+    width: 40%;
+  }
 }

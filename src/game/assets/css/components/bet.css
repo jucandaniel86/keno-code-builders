@@ -60,3 +60,12 @@
   height: 30px;
   fill: var(--btn-green-bgcolor);
 }
+
+@media (max-width: 641px) {
+  .input-wrapper {
+    border: 1px solid #4a4661;
+    flex: 1;
+    text-align: center;
+    background-color: transparent;
+  }
+}

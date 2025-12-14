@@ -4,14 +4,14 @@ import { onMounted } from 'vue'
 
 const DEVICES = [
   { maxWidth: 480, minWidth: 0, device: DevicesEnum.MOBILE },
-  { maxWidth: 768, minWidth: 481, device: DevicesEnum.TABLET },
-  { maxWidth: 3000, minWidth: 769, device: DevicesEnum.DESKTOP },
+  { maxWidth: 950, minWidth: 481, device: DevicesEnum.TABLET },
+  { maxWidth: 3000, minWidth: 951, device: DevicesEnum.DESKTOP },
 ]
 
 export const useHTMLEvents = () => {
   const { setAppSize, setDevice } = useAppStore()
 
-  const onResize = useDebounceFn(() => {
+  const onResizeCallback = () => {
     const { width, height } = useWindowSize()
 
     setAppSize(width.value, height.value)
@@ -21,10 +21,22 @@ export const useHTMLEvents = () => {
         return setDevice(device.device)
       }
     })
-  }, 1000)
+    const appEl = document.querySelector('#app')
+    if (appEl) {
+      appEl.classList.remove('resize')
+    }
+  }
+
+  const onResize = useDebounceFn(() => onResizeCallback(), 1000)
 
   onMounted(() => {
-    onResize()
-    useEventListener(window, 'resize', onResize)
+    onResizeCallback()
+    useEventListener(window, 'resize', () => {
+      const appEl = document.querySelector('#app')
+      if (appEl) {
+        appEl.classList.add('resize')
+      }
+      onResize()
+    })
   })
 }

@@ -8,11 +8,15 @@
   );
   --base-border-radius: 10px;
   --small-padding: 0.25rem;
+  --md-padding: 0.5rem;
   --small-radius: 0.25rem;
   --md-radius: 0.5rem;
+  --mb-sm: 0.25rem;
   --full-radius: 100%;
   --btn-green-bgcolor: #1c9464;
   --btn-red-bgcolor: #fb0256;
+
+  --keno-type-classic-color: #fbc94a;
 
   /* TOP */
   --top-container-boxshadow: #0003 0 4px 6px -1px, #0000001f 0 2px 4px -1px;
@@ -54,7 +58,9 @@
 
   /** TABS **/
   --tab-btn-textcolor: #b4c2cd;
+  --tab-btn-mobile-textcolor: #a795af;
   --tabs-border-color: #0f212e;
+  --tabs-border-mobile-color: #543a53;
 
   /* SETTINGS */
   --settings-modal-bg: #244c5d;

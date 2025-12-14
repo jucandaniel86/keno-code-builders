@@ -17,11 +17,11 @@ const onClickHandler = (ball: number) => {
   selectedNumbers.value = [...selectedNumbers.value, ball]
 }
 
-const customResults = [10, 55, 2, 5, 6, 12, 66, 45, 12]
+// const customResults = [10, 55, 2, 5, 6, 12, 66, 45, 12]
 </script>
 <template>
   <div class="keno-paytable-numbers-container">
-    <Draw v-if="customResults" :results="customResults" />
+    <Draw v-if="results" :results="results" />
     <button
       v-for="n in MAX_RANDOM_BALL"
       :key="`Number${n}`"
