@@ -40,7 +40,6 @@
   width: 100%;
   max-width: 500px;
   box-shadow: var(--modal-box-shadow);
-  border-radius: 0.5rem;
   position: relative;
   max-height: 100%;
   height: -moz-fit-content;
@@ -134,4 +133,8 @@
   -webkit-mask-size: contain;
   mask-size: contain;
   background-color: var(--label-color);
+}
+
+.game-info-content {
+  color: #000;
 }

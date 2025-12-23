@@ -4,17 +4,30 @@ import Clock from '../Core/clock/Clock.vue'
 import { useStatusStore } from '@/stores/status'
 import { DevicesEnum, useAppStore } from '@/stores/app'
 import Logo from './Logo.vue'
+import { GAME_TYPES } from '@/config/app.config'
+import { useLotteryStore } from '@/stores/lottery'
 
+//stores
 const { balance } = storeToRefs(useStatusStore())
 const { device } = storeToRefs(useAppStore())
+const { activeGame } = storeToRefs(useLotteryStore())
+
+//methods
+const { setActiveGame } = useLotteryStore()
 </script>
 <template>
   <div>
     <div class="draw-info-container">
       <div class="draw-keno-type" v-if="device === DevicesEnum.DESKTOP">
-        <button class="keno-type-btn active">Keno Classic</button>
-        <button class="keno-type-btn">Jackpot</button>
-        <button class="keno-type-btn">Heads or Tails</button>
+        <button
+          v-for="game in GAME_TYPES"
+          :key="game.id"
+          class="keno-type-btn"
+          :class="{ active: game.value === activeGame }"
+          @click.prevent="setActiveGame(game.value)"
+        >
+          {{ game.label }}
+        </button>
       </div>
       <Logo v-else />
       <div class="draw-info-details">
@@ -23,9 +36,15 @@ const { device } = storeToRefs(useAppStore())
       </div>
     </div>
     <div v-if="device !== DevicesEnum.DESKTOP" class="keno-game-types-mobile">
-      <button class="keno-type-btn active">Keno Classic</button>
-      <button class="keno-type-btn">Jackpot</button>
-      <button class="keno-type-btn">Heads or Tails</button>
+      <button
+        v-for="game in GAME_TYPES"
+        :key="game.id"
+        class="keno-type-btn"
+        :class="{ active: game.value === activeGame }"
+        @click.prevent="setActiveGame(game.value)"
+      >
+        {{ game.label }}
+      </button>
     </div>
   </div>
 </template>

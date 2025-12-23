@@ -1,4 +1,4 @@
-import type { GAME_TYPES_ENUM } from '@/config/app.config'
+import { GAME_TYPES_ENUM } from '@/config/app.config'
 import { useUtils } from '@/core/core.Util'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
@@ -64,6 +64,8 @@ export const useLotteryStore = defineStore('lottery', () => {
   const futureDraws = ref<any[]>([])
   const nextDraw = ref<NewBetType[]>([])
   const previousDraws = ref<GameTicketType[]>([])
+  //game type
+  const activeGame = ref<GAME_TYPES_ENUM>(GAME_TYPES_ENUM.CLASSIC)
 
   const setLottery = (_payload: any) => {
     const { isSet } = useUtils()
@@ -122,13 +124,15 @@ export const useLotteryStore = defineStore('lottery', () => {
             balls,
           }
         })
-
-      console.log('tickets', tickets)
       nextDraw.value = tickets
     }
     if (isSet(_payload.previousDraws)) {
       previousDraws.value = _payload.previousDraws
     }
+  }
+
+  const setActiveGame = (_payload: GAME_TYPES_ENUM) => {
+    activeGame.value = _payload
   }
 
   return {
@@ -145,7 +149,9 @@ export const useLotteryStore = defineStore('lottery', () => {
     futureDraws,
     nextDraw,
     previousDraws,
+    activeGame,
     setLottery,
     setTickets,
+    setActiveGame,
   }
 })

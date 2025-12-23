@@ -34,10 +34,12 @@ const activeTab = computed(() =>
 <template>
   <div class="modal-settings">
     <div class="modal-settings-left">
-      <button @click.prevent="closeModal" class="close-btn">
-        <AppIcon icon="close" />
-      </button>
-      <h1 v-if="activeTab" class="modal-title">{{ activeTab.title }}</h1>
+      <h1 v-if="activeTab" class="modal-title">
+        <button @click.prevent="closeModal" class="close-btn">
+          <AppIcon icon="close" />
+        </button>
+        {{ activeTab.title }}
+      </h1>
 
       <Info v-if="activeTab && activeTab.id === SettingMenuType.INFO" />
       <History v-if="activeTab && activeTab.id === SettingMenuType.HISTORY" />

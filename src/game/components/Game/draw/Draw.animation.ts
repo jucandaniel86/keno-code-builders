@@ -10,33 +10,13 @@ type DrawedBallsType = {
   num: number
 }
 
-const BALL_SVG = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-          <defs>
-            <radialGradient id="bg" cx="40%" cy="35%" r="70%">
-              <stop offset="0%" stop-color="#ffffff" />
-              <stop offset="55%" stop-color="#f0f4f8" />
-              <stop offset="100%" stop-color="#cfd8e3" />
-            </radialGradient>
-            <radialGradient id="shine" cx="30%" cy="30%" r="60%">
-              <stop offset="0%" stop-color="rgba(255,255,255,0.8)" />
-              <stop offset="80%" stop-color="rgba(255,255,255,0)" />
-            </radialGradient>
-          </defs>
-          <circle cx="100" cy="100" r="94" fill="url(#bg)" stroke="#0f1f24" stroke-width="4"/>
-          <circle cx="100" cy="100" r="75" fill="none" stroke="rgba(9,123,172,0.25)" stroke-width="10"/>
-          <ellipse cx="70" cy="70" rx="38" ry="28" fill="url(#shine)" />
-        </svg>
-      `
-const BALL_SVG_URI = `data:image/svg+xml;utf8,${encodeURIComponent(BALL_SVG)}`
-
 export const useDrawAnimation = () => {
   const canvas = ref<any>()
   const ctx = ref()
 
   const drawedBalls = ref<DrawedBallsType[]>([])
   const status = ref<string>('')
-  const currentBall = document.getElementById('currentBall')
+  const currentBall = ref<HTMLElement>()
 
   let balls: any[] = []
   let remaining: any[] = []
@@ -65,12 +45,7 @@ export const useDrawAnimation = () => {
   }
 
   function init() {
-    const root = document.documentElement
-    if (root) {
-      console.log('init root()', `url(${BALL_SVG_URI})`)
-      root.style.setProperty('--ball-tex', `url(${BALL_SVG_URI})`)
-    }
-
+    currentBall.value = document.querySelector('.current-ball') as HTMLElement
     canvas.value = document.querySelector('#canvas-draw-animation')
     ctx.value = canvas.value?.getContext('2d')
 
@@ -138,21 +113,21 @@ export const useDrawAnimation = () => {
   }
 
   function resetCurrentBall() {
-    if (!currentBall) return
-    currentBall.textContent = '--'
-    currentBall.style.setProperty('--accent', '#15383e')
-    currentBall.classList.remove('show')
-    currentBall.style.opacity = '0'
+    if (!currentBall.value) return
+    currentBall.value.textContent = '--'
+    currentBall.value.style.setProperty('--accent', '#15383e')
+    currentBall.value.classList.remove('show')
+    currentBall.value.style.opacity = '0'
   }
 
   function showCurrentBall(num: string, color: string) {
-    if (!currentBall) return
-    currentBall.textContent = num
-    currentBall.style.setProperty('--accent', color || '#15383e')
-    currentBall.classList.remove('show')
+    if (!currentBall.value) return
+    currentBall.value.textContent = num
+    currentBall.value.style.setProperty('--accent', color || '#15383e')
+    currentBall.value.classList.remove('show')
     // force reflow to restart animation
-    void currentBall.offsetWidth
-    currentBall.classList.add('show')
+    void currentBall.value.offsetWidth
+    currentBall.value.classList.add('show')
   }
 
   // Coliziuni între mingi (dezactivate)

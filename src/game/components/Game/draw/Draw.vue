@@ -32,3 +32,6 @@ onMounted(async () => {
     </div>
   </div>
 </template>
+<style scoped>
+@import url('./Draw.css');
+</style>

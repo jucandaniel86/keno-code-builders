@@ -35,10 +35,11 @@
   cursor: pointer;
   padding: 0.5rem;
   position: absolute;
-  top: 1rem;
-  left: 1rem;
+  top: 50%;
+  left: 2px;
   background: none;
   border: none;
+  transform: translateY(-50%);
 }
 
 .close-btn svg {
@@ -50,6 +51,7 @@
 .modal-title {
   text-align: center;
   color: #fff;
+  position: relative;
 }
 
 .settings-btn {
@@ -79,4 +81,30 @@
 
 .settings-btn.selected svg {
   color: #fff;
+}
+
+@media (max-width: 641px) {
+  .modal-settings {
+    flex-direction: column;
+  }
+  .modal-settings-left {
+    height: 90%;
+    overflow-y: scroll;
+  }
+  .modal-settings-right {
+    height: 10%;
+    width: 100%;
+    flex-direction: row;
+    border: 0;
+    z-index: 1;
+    position: relative;
+  }
+  .settings-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+  .settings-btn {
+    font-size: 0.8rem;
+    height: 100%;
+  }
 }

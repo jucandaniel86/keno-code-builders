@@ -15,6 +15,9 @@
 @import './components/header.css';
 @import './components/tabs.css';
 @import './components/draw.css';
+@import './components/hot.css';
+@import './components/trends.css';
+@import './components/transitions.css';
 
 *,
 ::after,
@@ -126,11 +129,84 @@ button:disabled {
   }
 }
 
+@media (max-width: 950px) {
+  .keno-right-container {
+    margin: 0 auto;
+    gap: 0;
+    width: 100%;
+    max-width: 600px;
+  }
+  .keno-paytable {
+    padding: 0;
+  }
+  .keno-main-container {
+    justify-content: center;
+  }
+}
+
 #app {
   transform: all;
+  width: 100%;
+  height: 100%;
 }
 
 #app.resize {
   filter: blur(5px);
   background: #000;
+}
+
+.keno-playtable-container {
+  position: relative;
+  display: flex;
+}
+
+@media (max-width: 950px) {
+  .keno-playtable-container {
+    flex-direction: row;
+    gap: 0.5rem;
+    height: 40%;
+  }
+  .keno-bottom-actions-container {
+    flex-direction: column;
+    max-width: 70px;
+  }
+  .keno-autopick {
+    border: none;
+    border-top: 1px solid #455668;
+    border-bottom: 1px solid #455668;
+    overflow: hidden;
+    padding: 0.5rem 0;
+  }
+  .timer-wrapper {
+    height: 10%;
+  }
+  .mobile-actions-container {
+    height: 50%;
+    margin: 0 !important;
+  }
+  .keno-autopick-label {
+    display: none;
+  }
+  .keno-autopick-wrapper {
+    flex-direction: column;
+  }
+  .keno-autopick-btn.keno-autopick-prev svg {
+    transform: rotate(180deg);
+  }
+  .keno-autopick-btn.keno-autopick-next svg {
+    transform: rotate(0deg);
+  }
+}
+
+@media (max-width: 641px) {
+  .keno-bottom-actions-container {
+    max-width: 40px;
+  }
+  .keno-autopick {
+    border: none;
+  }
+}
+
+.slide-wrapper {
+  flex: 1;
 }

@@ -1,0 +1,85 @@
+.hot-component-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.hot-component-wrapper {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.5rem;
+  flex: 1;
+}
+
+.hot-component-wrapper .hot-options-btn {
+  /* border: 1px solid var(--bottom-bg-color); */
+  color: #fff;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  cursor: pointer;
+  background-color: transparent;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.hot-component-wrapper .hot-options-btn.heads {
+  border-bottom: 3px solid var(--heads-color);
+  background-color: var(--heads-color-bgcolor);
+}
+
+.hot-component-wrapper .hot-options-btn.evens {
+  border-bottom: 3px solid var(--evens-color);
+  background-color: var(--evens-color-bgcolor);
+}
+
+.hot-component-wrapper .hot-options-btn.tails {
+  border-bottom: 3px solid var(--tails-color);
+  background: var(--tails-color-bgcolor);
+}
+
+.hot-component-wrapper .hot-options-btn.selected.heads {
+  background: var(--heads-selected-color-bgcolor);
+}
+
+.hot-component-wrapper .hot-options-btn.selected.tails {
+  background: var(--tails-selected-color-bgcolor);
+}
+
+.hot-component-wrapper .hot-options-btn.selected.evens {
+  background: var(--evens-selected-color-bgcolor);
+}
+
+.hot-options-selected {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.2rem;
+  z-index: 1;
+}
+
+.hot-options-selected svg {
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  font-size: 20px;
+  fill: #fff;
+}
+
+.hot-options-label {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  bottom: 0.5rem;
+  left: 0;
+}
+
+.hot-component-title {
+  color: #fff;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0.25rem 0;
+  font-weight: 300;
+  text-align: center;
+}

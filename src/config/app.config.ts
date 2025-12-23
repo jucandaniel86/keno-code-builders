@@ -153,3 +153,64 @@ export enum GAME_TYPES_ENUM {
   BONUS = 'BONUS',
   HOT = 'HEADSORTAILS',
 }
+
+export const MAX_SUBSCRIPTIONS = 50
+
+export const GAME_TYPES = [
+  {
+    id: 'classic',
+    label: 'Classic',
+    value: GAME_TYPES_ENUM.CLASSIC,
+    type: 1,
+  },
+  {
+    id: 'jackpot',
+    label: 'Jackpot',
+    value: GAME_TYPES_ENUM.JACKPOT,
+    type: 2,
+  },
+  {
+    id: 'bonus',
+    label: 'Bonus',
+    value: GAME_TYPES_ENUM.BONUS,
+    type: 3,
+  },
+  {
+    id: 'hot',
+    label: 'Heads or Tails',
+    value: GAME_TYPES_ENUM.HOT,
+    type: 4,
+  },
+]
+
+export enum HOT_BALL_ENUM {
+  TAILS = 'TAILS',
+  HEADS = 'HEADS',
+  EVENS = 'EVENS',
+}
+
+export type HotBallType = {
+  type: HOT_BALL_ENUM
+  class: string
+  label: string
+}
+
+export const HOT_SELECTION_TYPES: HotBallType[] = [
+  {
+    type: HOT_BALL_ENUM.HEADS,
+    label: 'Heads',
+    class: 'heads',
+  },
+  {
+    type: HOT_BALL_ENUM.TAILS,
+    label: 'Tails',
+    class: 'tails',
+  },
+  {
+    type: HOT_BALL_ENUM.EVENS,
+    label: 'Evens',
+    class: 'evens',
+  },
+]
+
+export const MAX_TRENDS_LIMIT = 8

@@ -13,6 +13,12 @@
       "gameInfo": "Game Info",
       "exit": "Exit",
       "history": "History"
+    },
+    "trends": {
+      "title": "Trends from the last 8 games"
+    },
+    "hot": {
+      "title": "Select one below"
     }
   },
   "info": {

@@ -68,5 +68,17 @@
   --settings-text-content-color: #fff;
   --settings-btn-color: #1f3646;
 
-  --ball-tex: none;
+  --ball-tex: url('../imgs/ball.svg');
+
+  --heads-color: #38a4d0;
+  --tails-color: #e25f2c;
+  --evens-color: rgba(90, 156, 59, 0.6);
+
+  --tails-color-bgcolor: rgba(226, 95, 45, 0.3);
+  --evens-color-bgcolor: rgba(65, 119, 65, 0.3);
+  --heads-color-bgcolor: rgba(57, 164, 208, 0.3);
+
+  --tails-selected-color-bgcolor: rgba(226, 95, 45, 0.6);
+  --evens-selected-color-bgcolor: rgba(65, 119, 65, 0.6);
+  --heads-selected-color-bgcolor: rgba(57, 164, 208, 0.6);
 }

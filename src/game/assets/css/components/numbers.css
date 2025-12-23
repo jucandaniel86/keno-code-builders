@@ -77,7 +77,7 @@
     1px 1px 10px #ccc;
 }
 
-@media (max-width: 641px) {
+@media (max-width: 950px) {
   .keno-paytable {
     width: 100%;
     padding: var(--small-radius);
@@ -90,7 +90,15 @@
     border: none;
     aspect-ratio: 1 / 1;
   }
+  .keno-number:hover {
+    border: none;
+    background: none;
+  }
   .keno-number.selected {
     border: none;
+  }
+  .keno-paytable-numbers-container {
+    max-width: 350px;
+    margin: 0 auto;
   }
 }
