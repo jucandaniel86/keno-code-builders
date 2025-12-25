@@ -46,9 +46,12 @@
   height: fit-content;
   overflow-y: auto;
   overflow-x: hidden;
-  transition: all 5ms ease-in-out;
+  transition: all 700ms ease-in-out;
   background: #fff;
-  color: #000;
+  color: #fff;
+  transform: translateY(-5rem);
+  background-color: #1f3646;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
 }
 
 .scrollX {
@@ -67,12 +70,18 @@
 
 .modal-header {
   display: flex;
-  justify-content: space-between;
-  padding: 1rem;
+  justify-content: center;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.modal-header h2 {
+  padding: 0;
+  margin: 0;
 }
 
 .modal-content {
-  color: #000;
+  color: #fff;
 }
 
 .modal-content.game-info {
@@ -96,35 +105,26 @@
 .modal-header button:hover .close-icon {
   background-color: var(--text-color);
 }
-
-.modal-btn {
-  display: inline-block;
-  box-sizing: border-box;
+.modal-actions button {
+  padding: 8px 16px;
+  background-color: #2f8cff;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
-  font-style: inherit;
-  font-variant: inherit;
-  font-weight: inherit;
-  font-stretch: inherit;
-  font-family: inherit;
-  font-optical-sizing: inherit;
-  font-size-adjust: inherit;
-  font-kerning: inherit;
-  font-feature-settings: inherit;
-  font-variation-settings: inherit;
-  text-decoration: none;
-  margin: 0px;
-  overflow: visible;
-  text-transform: none;
-  border: 2px solid var(--button-bet-color-background, var(--bet-win-color));
-  color: var(--text-color);
-  padding: 4px 22px;
-  font-size: 18px;
-  line-height: 24px;
-  background: var(--button-bet-color-background, var(--bet-win-color));
-  border-radius: 18px;
-  transition-property: color, background-color, border-color, box-shadow;
-  transition-duration: 0.1s;
-  transition-timing-function: ease-in-out;
+  font-size: 0.9rem;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.modal-actions button:hover {
+  background-color: #1f6fe0;
+  transform: translateY(-1px);
+}
+
+.modal-actions button:active {
+  transform: translateY(0);
 }
 
 .bet-icon {
@@ -136,5 +136,5 @@
 }
 
 .game-info-content {
-  color: #000;
+  color: #fff;
 }

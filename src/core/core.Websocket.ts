@@ -204,6 +204,9 @@ export default class WebsocketConnector extends Logger {
     return this.serverRequest(request)
   }
 
+  /**
+   * @void
+   */
   private startHeartbeat() {
     const nInterval: number = HEARTBEAT_INTERVAL * 1000
     const { getQueryParams } = useUtils()

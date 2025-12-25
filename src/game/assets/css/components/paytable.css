@@ -1,47 +1,52 @@
 .paytable-container {
-  height: 40%;
   overflow-y: auto;
   background-color: var(--paytable-bg-color);
-  border-radius: 0.5rem;
-  padding: var(--small-padding);
+  padding: 0.5rem;
   color: rgb(177, 186, 211);
+  display: flex;
+  gap: 0.5rem;
+  height: 50px;
 }
 
-.paytable-row {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  display: grid;
-  margin-bottom: 0.5rem;
-}
-
-.semibold {
-  font-weight: 500;
-}
-
-.paytable-header {
-  border-bottom: 1px solid rgba(203 213 225);
-}
-
-.prizes-list {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.prizes-list thead {
-  background-color: #1a2c38;
-}
-
-.prizes-list tbody tr {
-  height: 30px;
-  background-color: #437589;
-}
-
-.prizes-list tbody tr:nth-child(odd) {
-  background-color: #244c5d;
-}
-
-.prizes-list tbody td {
-  padding: 0.25rem;
-  text-align: center;
+.paytable-container .paytable-headers {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
   color: #fff;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
+  position: relative;
+  padding-right: 1rem;
+}
+
+.paytable-container .paytable-headers::after {
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  content: '';
+  height: 50%;
+  position: absolute;
+  right: 0;
+  top: 25%;
+  width: 1px;
+  z-index: 1;
+}
+
+.paytable-container .paytable-values {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.paytable-prize {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.6rem;
+}
+
+.paytable-prize-value {
+  overflow: hidden;
+  white-space: nowrap;
 }

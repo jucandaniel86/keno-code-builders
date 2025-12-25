@@ -1,55 +1,83 @@
 <script setup lang="ts">
-import { BETTING_WARNING_SECONDS } from '@/config/app.config'
+import { BETTING_WARNING_SECONDS, GAME_NAME } from '@/config/app.config'
 import { useLotteryStore } from '@/stores/lottery'
 import { storeToRefs } from 'pinia'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
+import Prizes from './Prizes.vue'
+import { DevicesEnum, useAppStore } from '@/stores/app'
 
-const { nextDrawSeconds, drawNumber } = storeToRefs(useLotteryStore())
-const TOTAL_SECONDS = 150
+const { nextDrawSeconds, drawNumber, nextTimestamp, lastTimestamp, activeGame } =
+  storeToRefs(useLotteryStore())
+const { device } = storeToRefs(useAppStore())
+const TOTAL_SECONDS = ref(
+  (new Date(nextTimestamp.value).getTime() - new Date(lastTimestamp.value).getTime()) / 1000,
+)
 const interval = ref()
 const warning = ref<boolean>(false)
 const localTimer = ref(nextDrawSeconds.value)
 
-onMounted(() => {
+//emitters
+const emitters = defineEmits(['onTimerEnds'])
+
+//methods
+const init = () => {
+  clearInterval(interval.value)
   interval.value = setInterval(() => {
-    if (localTimer.value - 1 <= 0) {
+    if (localTimer.value <= 0) {
+      emitters('onTimerEnds')
       clearInterval(interval.value)
+      return
     }
     localTimer.value = localTimer.value - 1
 
     if (localTimer.value <= BETTING_WARNING_SECONDS) {
       warning.value = true
+    } else {
+      warning.value = false
     }
   }, 1000)
+}
+
+onMounted(() => {
+  init()
 })
 
 //computed
 const progressBarWidth = computed(() => {
-  return (localTimer.value / TOTAL_SECONDS) * 100
+  return (localTimer.value / TOTAL_SECONDS.value) * 100
 })
 
 const timerSeconds = computed(() => {
-  const minutes = Math.floor(nextDrawSeconds.value / 60)
-  const seconds = localTimer.value - minutes * 60
+  const minutes = Math.floor(localTimer.value / 60)
+  const seconds = localTimer.value % 60
 
-  const lMinutes = String(minutes).length === 1 ? `0${minutes}` : minutes
-  const lSeconds = String(seconds).length === 1 ? `0${seconds}` : seconds
+  return String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0')
+})
 
-  return `${lMinutes}:${lSeconds}`
+watch(nextDrawSeconds, () => {
+  localTimer.value = nextDrawSeconds.value
+  init()
 })
 </script>
 <template>
   <div class="timer-wrapper">
-    <div class="timer-draw-details">
-      <span>KENO</span>
-      <span>CLASSIC</span>
-      <span class="draw-number">#{{ drawNumber }}</span>
+    <div class="timer-game-details">
+      <div
+        class="timer-draw-details"
+        v-if="device === DevicesEnum.DESKTOP || device === DevicesEnum.TABLET"
+      >
+        <span>{{ GAME_NAME }}</span>
+        <span>{{ activeGame }}</span>
+        <span class="draw-number">#{{ drawNumber }}</span>
+      </div>
+      <Prizes />
     </div>
+
     <div class="timer-progress-wrapper">
       <span class="timer-seconds" :class="{ betwarning: warning }">{{ timerSeconds }}</span>
       <span class="timer-status-text" :class="{ betwarning: warning }">Please place your bets</span>
     </div>
-    <div class="progress-bar-wrapper">
+    <div class="progress-bar-wrapper" :style="{ opacity: localTimer === 0 ? 0 : 10 }">
       <div
         class="bar"
         :class="{ barwarning: warning }"

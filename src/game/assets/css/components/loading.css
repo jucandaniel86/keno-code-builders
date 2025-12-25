@@ -10,6 +10,9 @@
   justify-content: center;
   align-items: center;
 }
+.loading-logo__wrapper h1 {
+  color: #fff;
+}
 
 .loader {
   --loader-size: calc(var(--block-size) / 2);

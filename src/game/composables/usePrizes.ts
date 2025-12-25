@@ -53,12 +53,6 @@ export const usePrizes = () => {
     }
   }
 
-  // let sortedPrizes = _.sortBy(currentPrizes, ["match"], "asc");
-  // if (display === PrizeDisplayType.TOP || display === PrizeDisplayType.POPUP) {
-  //   sortedPrizes = sortedPrizes.reverse();
-  // }
-  // }
-
   watch(selectedNumbers, () => {
     extractCurrentPrize()
   })

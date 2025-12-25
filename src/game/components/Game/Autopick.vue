@@ -9,6 +9,7 @@ import { useI18n } from 'vue-i18n'
 type AutopickType = {
   disabled: boolean
   numbers: number[]
+  defaultOption?: number
 }
 const props = defineProps<AutopickType>()
 
@@ -19,8 +20,10 @@ const { t } = useI18n()
 const emitters = defineEmits(['onSelect'])
 
 //models
-const currentIndex = ref<number>(0)
-
+const currentIndex = ref<number>(
+  props.numbers.findIndex((_number: number) => _number === props.defaultOption),
+)
+console.log('current index', currentIndex.value, props.defaultOption)
 //computed
 const currentNumber = computed(() => {
   return props.numbers[currentIndex.value]

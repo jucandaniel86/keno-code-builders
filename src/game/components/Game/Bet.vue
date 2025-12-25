@@ -5,16 +5,19 @@ import { useI18n } from 'vue-i18n'
 import { useSessionStore } from '@/stores/session'
 import { useStatusStore } from '@/stores/status'
 import { storeToRefs } from 'pinia'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import StakeSelector from '../Shared/StakeSelector.vue'
 import { usePlaceBet } from '@/game/composables/usePlaceBet'
 import { DevicesEnum, useAppStore } from '@/stores/app'
+import { useLotteryStore } from '@/stores/lottery'
+import { GAME_TYPES_ENUM } from '@/config/app.config'
 
 //composables
 const { t } = useI18n()
 const { setSessionData } = useSessionStore()
 const { setStatusData } = useStatusStore()
 const { betLevels, betIndex } = storeToRefs(useSessionStore())
+const { activeGame } = storeToRefs(useLotteryStore())
 const { betDisabled, placeBet } = usePlaceBet()
 
 //models
@@ -33,7 +36,6 @@ const updateBetIndex = (value: number) => {
 
 const handlePlaceBet = async () => {
   betLoading.value = true
-  console.log('on place bet')
   await placeBet()
   betLoading.value = false
 }
@@ -41,6 +43,15 @@ const handlePlaceBet = async () => {
 const { device } = storeToRefs(useAppStore())
 const stakeSelectorLabel = computed(() => {
   return device.value === DevicesEnum.DESKTOP ? t('components.sidebar.betAmount') : null
+})
+
+watch(activeGame, () => {
+  if (activeGame.value === GAME_TYPES_ENUM.JACKPOT) {
+    sidebarDisabled.value = true
+    updateBetIndex(2)
+  } else {
+    sidebarDisabled.value = false
+  }
 })
 </script>
 <template>

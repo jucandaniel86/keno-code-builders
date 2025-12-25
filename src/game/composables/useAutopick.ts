@@ -15,7 +15,21 @@ export const useAutopick = () => {
     return newNumber
   }
 
-  const generateNumbers = async (totalNumbers: number) => {
+  const generateNumbers = async (totalNumbers: number, animation: boolean = true) => {
+    if (!animation) {
+      const newNumbers = []
+
+      while (totalNumbers >= newNumbers.length) {
+        const newNumber = generateRandomNumber()
+
+        if (newNumbers.indexOf(newNumber) === -1) {
+          newNumbers.push(newNumber)
+        }
+      }
+      setSelectedNumbers(newNumbers)
+      return
+    }
+
     return new Promise((resolve) => {
       const { selectedNumbers } = storeToRefs(useGameStore())
 

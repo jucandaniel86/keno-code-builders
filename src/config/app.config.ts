@@ -8,7 +8,7 @@ export enum TabsEnum {
   DRAW = 'draw',
 }
 
-export const GAME_NAME = 'Keno Originals'
+export const GAME_NAME = 'KENO'
 export const APP_STORAGE_ID = GAME_NAME.split(' ').join('_') + '_store'
 export const GAME_ID = 4025
 export const MOBILE_RESOLUTION = 700
@@ -193,6 +193,7 @@ export type HotBallType = {
   type: HOT_BALL_ENUM
   class: string
   label: string
+  value: 'E' | 'T' | 'H'
 }
 
 export const HOT_SELECTION_TYPES: HotBallType[] = [
@@ -200,17 +201,21 @@ export const HOT_SELECTION_TYPES: HotBallType[] = [
     type: HOT_BALL_ENUM.HEADS,
     label: 'Heads',
     class: 'heads',
+    value: 'H',
   },
   {
     type: HOT_BALL_ENUM.TAILS,
     label: 'Tails',
     class: 'tails',
+    value: 'T',
   },
   {
     type: HOT_BALL_ENUM.EVENS,
     label: 'Evens',
     class: 'evens',
+    value: 'E',
   },
 ]
 
 export const MAX_TRENDS_LIMIT = 8
+export const DEFAULT_NUMBERS_LIMIT = 10

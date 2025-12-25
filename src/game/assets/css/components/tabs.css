@@ -94,6 +94,32 @@
   position: relative;
 }
 
+.BetTicketHeaderContainer {
+  display: flex;
+  gap: 3px;
+}
+
+.BetTicketHotType {
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  margin-top: -0.25em;
+}
+
+.BetTicketHotType.T {
+  background-color: var(--tails-color);
+}
+
+.BetTicketHotType.H {
+  background-color: var(--heads-color);
+}
+
+.BetTicketHotType.E {
+  background-color: var(--evens-color);
+}
+
 .BetTicketHeaderType {
   background-color: #fbc94a;
   padding: 0.25rem;

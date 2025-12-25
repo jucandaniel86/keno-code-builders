@@ -46,6 +46,18 @@
   }
 }
 
+.timer-game-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.timer-game-details > * {
+  width: 50%;
+  flex: 1;
+}
+
 .timer-draw-details {
   display: flex;
   gap: 0.5rem;
@@ -68,4 +80,8 @@
   content: '';
   height: 100%;
   right: -5px;
+}
+.pick-disclaimer {
+  font-size: 0.8rem;
+  color: #fff;
 }

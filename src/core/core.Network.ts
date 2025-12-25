@@ -7,7 +7,12 @@ import type LoginResponseData from './models/login/LoginResponseData'
 import type BetResponseData from './models/bet/BetResponseData'
 import type RequestData from './models/RequestData'
 
-import { DEFAULT_SOCKET_ENDPOINT, DEFAULT_SOCKET_SERVER_PATH, GAME_ID } from '@/config/app.config'
+import {
+  DEFAULT_SOCKET_ENDPOINT,
+  DEFAULT_SOCKET_SERVER_PATH,
+  GAME_ID,
+  GAME_TYPES_ENUM,
+} from '@/config/app.config'
 import type PlayerDetailsData from './models/PlayerDetailsData'
 import BetRequestData from './models/bet/BetRequestData'
 import Provider from './core.Provider'
@@ -154,7 +159,8 @@ export default class NetworkController extends Singleton {
     const { selectedNumbers } = storeToRefs(useGameStore())
     const { bet } = storeToRefs(useStatusStore())
     const { credit } = storeToRefs(useSessionStore())
-    const { nextDrawNumber, nextTimestamp } = storeToRefs(useLotteryStore())
+    const { nextDrawNumber, nextTimestamp, activeGame, hotBetOption } =
+      storeToRefs(useLotteryStore())
 
     finalRequest.choicesMade = selectedNumbers.value
     finalRequest.sessionID = this.loginRequestData.sessionID
@@ -162,9 +168,14 @@ export default class NetworkController extends Singleton {
     finalRequest.coins = [1]
     finalRequest.stakes = [bet.value]
     finalRequest.currency = credit.value?.currency
-    finalRequest.kenoGameType = 'CLASSIC' //@todo
+    finalRequest.kenoGameType = activeGame.value
     finalRequest.nextDrawNumber = nextDrawNumber.value
     finalRequest.nextTimestamp = nextTimestamp.value
+
+    if (activeGame.value === GAME_TYPES_ENUM.HOT) {
+      finalRequest.choicesMade = []
+      finalRequest.kenoBetType = hotBetOption.value
+    }
 
     return finalRequest
   }

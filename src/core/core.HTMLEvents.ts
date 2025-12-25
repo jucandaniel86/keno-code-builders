@@ -7,6 +7,7 @@ const DEVICES = [
   { maxWidth: 950, minWidth: 481, device: DevicesEnum.TABLET },
   { maxWidth: 3000, minWidth: 951, device: DevicesEnum.DESKTOP },
 ]
+const RESIZE_DEELAY = 500
 
 export const useHTMLEvents = () => {
   const { setAppSize, setDevice } = useAppStore()
@@ -27,7 +28,7 @@ export const useHTMLEvents = () => {
     }
   }
 
-  const onResize = useDebounceFn(() => onResizeCallback(), 1000)
+  const onResize = useDebounceFn(() => onResizeCallback(), RESIZE_DEELAY)
 
   onMounted(() => {
     onResizeCallback()

@@ -26,3 +26,6 @@
   color: var(--logo-text-color);
   font-size: 1.4rem;
 }
+.logo-text sup {
+  font-size: 0.6rem;
+}

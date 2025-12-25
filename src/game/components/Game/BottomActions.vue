@@ -2,8 +2,8 @@
 <script setup lang="ts">
 import { useAutopick } from '@/game/composables/useAutopick'
 import Autopick from './Autopick.vue'
-import { ref } from 'vue'
-import { ALLOWED_NUMBERS } from '@/config/app.config'
+import { onMounted, ref } from 'vue'
+import { ALLOWED_NUMBERS, DEFAULT_NUMBERS_LIMIT } from '@/config/app.config'
 import { storeToRefs } from 'pinia'
 import { useGameStore } from '@/stores/game'
 //@ts-ignore
@@ -36,6 +36,13 @@ const generateRandomNumbers = async () => {
 const clearNumbers = () => {
   setSelectedNumbers([])
 }
+
+onMounted(() => {
+  numberOption.value = DEFAULT_NUMBERS_LIMIT
+  if (selectedNumbers.value.length === 0) {
+    generateNumbers(DEFAULT_NUMBERS_LIMIT, false)
+  }
+})
 </script>
 
 <template>
@@ -51,6 +58,7 @@ const clearNumbers = () => {
     <Autopick
       :disabled="disableAction"
       :numbers="ALLOWED_NUMBERS"
+      :defaultOption="DEFAULT_NUMBERS_LIMIT"
       @onSelect="handleSelectedNumbers"
     />
     <button

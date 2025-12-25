@@ -13,4 +13,5 @@ export default class BetRequestData extends RequestData {
   public nextDrawNumber: any = ''
   public nextTimestamp: any = ''
   public kenoGameType = ''
+  public kenoBetType = 'T'
 }

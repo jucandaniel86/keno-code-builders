@@ -11,11 +11,20 @@ import { useAlerts } from './useAlerts'
 
 export const usePlaceBet = () => {
   const { t } = useI18n()
-  const { gameType, selectedNumbers } = storeToRefs(useGameStore())
+  const { selectedNumbers } = storeToRefs(useGameStore())
   const { credit, bet } = storeToRefs(useStatusStore())
-  const { bettingOpen, nextDrawSeconds } = storeToRefs(useLotteryStore())
+  const { bettingOpen, nextDrawSeconds, activeGame, hotBetOption } = storeToRefs(useLotteryStore())
+  const { error } = useAlerts()
 
   const betDisabled = computed(() => {
+    if (
+      activeGame.value === GAME_TYPES_ENUM.HOT &&
+      hotBetOption.value &&
+      (nextDrawSeconds.value >= BETTING_OPEN_SECONDS || bettingOpen.value)
+    ) {
+      return false
+    }
+
     if (
       !bettingOpen.value ||
       selectedNumbers.value.length === 0 ||
@@ -49,16 +58,20 @@ export const usePlaceBet = () => {
   const validate = () => {
     if (!bettingOpen.value) return false
 
-    if (selectedNumbers.value.length === 0 && gameType.value !== GAME_TYPES_ENUM.HOT) {
+    if (selectedNumbers.value.length === 0 && activeGame.value !== GAME_TYPES_ENUM.HOT) {
       ModalController.Instance().error(t('modals.TEXT_INVALID_NUMBERS'))
       return false
     }
 
+    if (activeGame.value === GAME_TYPES_ENUM.HOT && hotBetOption.value === '') {
+      return true
+    }
+
     if (
       !ALLOWED_NUMBERS.includes(selectedNumbers.value.length) &&
-      gameType.value !== GAME_TYPES_ENUM.HOT
+      activeGame.value !== GAME_TYPES_ENUM.HOT
     ) {
-      ModalController.Instance().error(t('modals.TEXT_INVALID_COMBINATION'))
+      error(t('modals.TEXT_INVALID_COMBINATION'))
       return false
     }
 
@@ -69,11 +82,13 @@ export const usePlaceBet = () => {
     if (!validate()) return
     if (isInsufficientFunds()) return
 
-    const { success } = useAlerts()
+    const { success, error } = useAlerts()
 
     const betData = await NetworkController.Instance().bet()
 
-    if (betData?.error.errorCode !== 0) return
+    if (betData?.error.errorCode !== 0) {
+      return error(betData?.error.errorMessage as string)
+    }
 
     success(t('modals.TEXT_PLACED_BET'))
 

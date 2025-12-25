@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { HOT_BALL_ENUM, HOT_SELECTION_TYPES } from '@/config/app.config'
-import { ref } from 'vue'
+import { HOT_SELECTION_TYPES } from '@/config/app.config'
+
 import AppIcon from '../Shared/AppIcon.vue'
 import Trands from '../Shared/Trands.vue'
 import { useI18n } from 'vue-i18n'
-const selectedOption = ref<HOT_BALL_ENUM>(HOT_BALL_ENUM.HEADS)
+import { storeToRefs } from 'pinia'
+import { useLotteryStore } from '@/stores/lottery'
 
-const handleSelectedOption = (option: HOT_BALL_ENUM) => {
-  selectedOption.value = option
-}
-
+const { hotBetOption } = storeToRefs(useLotteryStore())
+const { setHOTBetOption } = useLotteryStore()
 const { t } = useI18n()
 </script>
 <template>
@@ -20,15 +19,15 @@ const { t } = useI18n()
         v-for="option in HOT_SELECTION_TYPES"
         :key="option.type"
         class="hot-options-btn"
-        :class="`${option.class} ${selectedOption === option.type ? 'selected' : ''}`"
-        @click.prevent="handleSelectedOption(option.type)"
+        :class="`${option.class} ${hotBetOption === option.value ? 'selected' : ''}`"
+        @click.prevent="setHOTBetOption(option.value)"
       >
-        <span class="hot-options-selected" v-if="selectedOption === option.type">
+        <span class="hot-options-selected" v-if="hotBetOption === option.value">
           <AppIcon icon="check" />
         </span>
 
         {{ option.label }}
-        <span class="hot-options-label">Select</span>
+        <span class="hot-options-label">{{ t('components.hot.select') }}</span>
       </button>
     </div>
     <Trands />

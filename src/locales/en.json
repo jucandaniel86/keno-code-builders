@@ -18,7 +18,8 @@
       "title": "Trends from the last 8 games"
     },
     "hot": {
-      "title": "Select one below"
+      "title": "Select one below",
+      "select": "Select"
     }
   },
   "info": {

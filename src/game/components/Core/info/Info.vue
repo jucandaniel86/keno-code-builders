@@ -1,7 +1,5 @@
 <template>
-  <div class="wrapper wrapper-transition scrollX scrollY" style="max-width: 100%">
-    <div class="modal-content game-info-content" v-html="t('info.content')"></div>
-  </div>
+  <div class="game-info-content" v-html="t('info.content')"></div>
 </template>
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'

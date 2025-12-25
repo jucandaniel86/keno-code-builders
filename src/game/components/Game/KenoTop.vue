@@ -18,6 +18,7 @@ const { setActiveGame } = useLotteryStore()
 <template>
   <div>
     <div class="draw-info-container">
+      <Logo v-if="device === DevicesEnum.DESKTOP" />
       <div class="draw-keno-type" v-if="device === DevicesEnum.DESKTOP">
         <button
           v-for="game in GAME_TYPES"

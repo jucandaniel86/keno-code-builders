@@ -9,10 +9,14 @@ const props = defineProps<DrawComponent>()
 
 const { startDraw, status, canvas, drawedBalls } = useDrawAnimation()
 
+//emitters
+const emitters = defineEmits(['onAnimationEnds'])
+
 onMounted(async () => {
   await startDraw(props.results, {
     delayBetween: 1000,
   })
+  emitters('onAnimationEnds')
 })
 </script>
 <template>

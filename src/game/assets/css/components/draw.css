@@ -12,10 +12,14 @@
   flex-direction: column;
   gap: 0.5rem;
   padding: 0.5rem;
+  height: 100%;
 }
 
 .status {
   color: #fff;
+  position: absolute;
+  top: 5px;
+  left: 5px;
 }
 
 .ball-small {
@@ -37,9 +41,10 @@
 .results {
   display: grid;
   grid-template-columns: repeat(10, 40px);
-  gap: 6px;
+  gap: 3px;
   justify-content: center;
   max-width: 480px;
+  width: 100%;
 }
 
 .current-ball {

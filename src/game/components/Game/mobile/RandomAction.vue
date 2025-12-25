@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useGameStore } from '@/stores/game'
 import { useAutopick } from '@/game/composables/useAutopick'
-import { ALLOWED_NUMBERS } from '@/config/app.config'
+import { ALLOWED_NUMBERS, DEFAULT_NUMBERS_LIMIT } from '@/config/app.config'
 import AppIcon from '../../Shared/AppIcon.vue'
 import Autopick from '../Autopick.vue'
 
@@ -13,7 +13,7 @@ const { selectedNumbers } = storeToRefs(useGameStore())
 const { setSelectedNumbers } = useGameStore()
 
 //models
-const numberOption = ref<number>(1)
+const numberOption = ref<number>(10)
 const disableAction = ref<boolean>(false)
 
 //methods
@@ -32,6 +32,12 @@ const generateRandomNumbers = async () => {
 const clearNumbers = () => {
   setSelectedNumbers([])
 }
+
+onMounted(() => {
+  //@todo
+  numberOption.value = DEFAULT_NUMBERS_LIMIT
+  generateRandomNumbers()
+})
 </script>
 <template>
   <div class="keno-bottom-actions-container">
@@ -42,9 +48,11 @@ const clearNumbers = () => {
     >
       <AppIcon icon="close" />
     </button>
+
     <Autopick
       :disabled="disableAction"
       :numbers="ALLOWED_NUMBERS"
+      :defaultOption="DEFAULT_NUMBERS_LIMIT"
       @onSelect="handleSelectedNumbers"
     />
     <button

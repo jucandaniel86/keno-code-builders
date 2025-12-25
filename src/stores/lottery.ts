@@ -66,6 +66,7 @@ export const useLotteryStore = defineStore('lottery', () => {
   const previousDraws = ref<GameTicketType[]>([])
   //game type
   const activeGame = ref<GAME_TYPES_ENUM>(GAME_TYPES_ENUM.CLASSIC)
+  const hotBetOption = ref<string>('T')
 
   const setLottery = (_payload: any) => {
     const { isSet } = useUtils()
@@ -110,8 +111,12 @@ export const useLotteryStore = defineStore('lottery', () => {
       const tickets = _payload.nextDraw
         .filter(
           (ticket: any) =>
-            ['CLASSIC', 'HOT'].indexOf(ticket.kenoGameType) !== -1 &&
-            nextDrawNumber.value === ticket.drawNumber,
+            [
+              GAME_TYPES_ENUM.CLASSIC,
+              GAME_TYPES_ENUM.BONUS,
+              GAME_TYPES_ENUM.HOT,
+              GAME_TYPES_ENUM.JACKPOT,
+            ].indexOf(ticket.kenoGameType) !== -1 && nextDrawNumber.value === ticket.drawNumber,
         )
         .map((ticket: any) => {
           const balls = ticket.balls.filter((_number: any) => {
@@ -135,6 +140,10 @@ export const useLotteryStore = defineStore('lottery', () => {
     activeGame.value = _payload
   }
 
+  const setHOTBetOption = (_payload: 'H' | 'T' | 'E') => {
+    hotBetOption.value = _payload
+  }
+
   return {
     maxWinCurrency,
     maxWin,
@@ -150,8 +159,10 @@ export const useLotteryStore = defineStore('lottery', () => {
     nextDraw,
     previousDraws,
     activeGame,
+    hotBetOption,
     setLottery,
     setTickets,
     setActiveGame,
+    setHOTBetOption,
   }
 })
