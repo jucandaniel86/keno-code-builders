@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { APP_STORAGE_ID } from '@/config/app.config'
 import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
 interface GameSettingsI {
   MUTE_BG: boolean
@@ -15,22 +14,23 @@ const getDefaultSettings = (): GameSettingsI => ({
 })
 
 const getSettings = (): GameSettingsI => {
-  const settings = localStorage.getItem(APP_STORAGE_ID)
-
-  return settings ? JSON.parse(settings) : getDefaultSettings()
+  return getDefaultSettings()
 }
 
-export const useSettingsStore = defineStore('settings', {
-  state: () => ({
-    settings: getSettings(),
-  }),
-  actions: {
-    updateSettings(partialSettings: any) {
-      this.settings = {
-        ...this.settings,
-        ...partialSettings,
-      }
-      localStorage.setItem(APP_STORAGE_ID, JSON.stringify(this.settings))
-    },
+export const useSettingsStore = defineStore(
+  'settings',
+  () => {
+    const MUTE_BG = ref<boolean>(getSettings().MUTE_BG)
+    const VOLUME_MUSIC = ref<number>(getSettings().VOLUME_MUSIC)
+    const INSTANT_BET = ref<boolean>(getSettings().INSTANT_BET)
+
+    return {
+      MUTE_BG,
+      VOLUME_MUSIC,
+      INSTANT_BET,
+    }
   },
-})
+  {
+    persist: true,
+  },
+)

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { MAX_RANDOM_BALL } from '@/config/app.config'
+import SoundManager from '@/core/core.Sounds'
 import { useGameStore } from '@/stores/game'
 import { storeToRefs } from 'pinia'
 
@@ -7,7 +8,7 @@ const { selectedNumbers, analisis } = storeToRefs(useGameStore())
 
 const onClickHandler = (ball: number) => {
   const findIndex = selectedNumbers.value.findIndex((_ball) => _ball === ball)
-
+  SoundManager.Instance().play('CLICK')
   if (findIndex !== -1) {
     selectedNumbers.value = selectedNumbers.value.filter((el, index) => index !== findIndex)
     return

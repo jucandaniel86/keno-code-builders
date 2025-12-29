@@ -6,6 +6,7 @@ import SettingsModal from '@/game/components/Core/modal/ModalSettings.vue'
 // eslint-disable-next-line vue/prefer-import-from-vue
 import { extend } from '@vue/shared'
 import { markRaw, ref } from 'vue'
+import SoundManager from '@/core/core.Sounds'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const component = extend({})
@@ -55,6 +56,9 @@ export default defineStore('modal', () => {
 
     // Get the body element
     const body = document.body
+
+    //play close sound
+    SoundManager.Instance().play('CLICK')
 
     // If its there, reset overflow style
     if (body) body.style.overflow = 'auto'

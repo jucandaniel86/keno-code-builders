@@ -3,6 +3,7 @@ import { nextTick, onMounted, ref, onUnmounted } from 'vue'
 import { useLotteryStore } from '@/stores/lottery'
 import { useLotteryMachine } from './useLotteryMatchine'
 import { MAX_DAWED_BALLS } from '@/config/app.config'
+import SoundManager from '@/core/core.Sounds'
 
 //types
 type DrawComponent = {
@@ -20,7 +21,7 @@ const { setExtractedNumbers } = useLotteryStore()
 const { run, targetRef } = useLotteryMachine({
   playSound: true,
   onBallDrawn: (ballNumber: number) => {
-    console.log('Drawn ball:', ballNumber)
+    SoundManager.Instance().play('REVEALED')
     currentDrawNunber.value += 1
     setExtractedNumbers(ballNumber)
   },
@@ -31,9 +32,10 @@ const emitters = defineEmits(['onAnimationEnds'])
 
 //mounted
 onMounted(async () => {
+  console.log('DRAW ANIMATION STARTS', props.results)
   await nextTick()
   await run(props.results)
-
+  console.log('DRAW ANIMATION ENDS')
   emitters('onAnimationEnds')
 })
 

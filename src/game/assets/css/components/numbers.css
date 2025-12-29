@@ -15,6 +15,7 @@
   flex-direction: column;
   gap: 0.5rem;
   padding-bottom: 0;
+  flex: 1;
 }
 
 .keno-paytable-numbers-container {
@@ -34,28 +35,27 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid var(--keno-number-bgcolor);
+  border: 2px solid transparent;
   transform: all 0.25ms;
   padding: 0;
+}
+
+.keno-number.hot {
+  border: 2px solid var(--hot-number-color);
+}
+.keno-number.cold {
+  border: 2px solid var(--cold-number-color);
 }
 
 .keno-number span {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--full-radius);
   padding: 0.5rem;
   font-size: var(--keno-number-font-size);
-  border: var(--keno-number-border);
   width: 100%;
   height: 100%;
-}
-
-.keno-number.hot span {
-  border: 1px solid var(--hot-number-color);
-}
-.keno-number.cold span {
-  border: 1px solid var(--cold-number-color);
+  border: 2px solid transparent;
 }
 
 .keno-number:hover {
@@ -69,7 +69,7 @@
 }
 
 .keno-number.selected span {
-  border: 2px solid var(--keno-number-selected-bgcolor);
+  border: 2px solid transparent;
   box-shadow: 0 0 5px 6px var(--keno-number-selected-bgcolor-opacity);
   background-color: var(--keno-number-selected-bgcolor);
   text-shadow:
@@ -100,10 +100,22 @@
   }
   .keno-number span {
     font-size: 0.8rem;
+    border-radius: var(--full-radius);
+    border: var(--keno-number-border);
   }
   .keno-paytable-numbers-container {
     max-width: 350px;
     margin: 0 auto;
     height: 100%;
+  }
+  .keno-number.hot span {
+    border: 1px solid var(--hot-number-color);
+  }
+  .keno-number.cold span {
+    border: 1px solid var(--cold-number-color);
+  }
+
+  .keno-number.selected span {
+    border: 2px solid var(--keno-number-selected-bgcolor);
   }
 }

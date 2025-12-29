@@ -4,6 +4,7 @@ import { computed, ref, watch } from 'vue'
 import AppIcon from '../Shared/AppIcon.vue'
 //@ts-ignore
 import { useI18n } from 'vue-i18n'
+import SoundManager from '@/core/core.Sounds'
 
 //props
 type AutopickType = {
@@ -23,7 +24,7 @@ const emitters = defineEmits(['onSelect'])
 const currentIndex = ref<number>(
   props.numbers.findIndex((_number: number) => _number === props.defaultOption),
 )
-console.log('current index', currentIndex.value, props.defaultOption)
+
 //computed
 const currentNumber = computed(() => {
   return props.numbers[currentIndex.value]
@@ -32,12 +33,12 @@ const currentNumber = computed(() => {
 //methods
 const next = () => {
   if (currentIndex.value + 1 >= props.numbers.length) return
-
+  SoundManager.Instance().play('CLICK')
   currentIndex.value = currentIndex.value + 1
 }
 const prev = () => {
   if (currentIndex.value - 1 < 0) return
-
+  SoundManager.Instance().play('CLICK')
   currentIndex.value = currentIndex.value - 1
 }
 

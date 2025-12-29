@@ -6,7 +6,7 @@
         v-model.number="value"
         :min="minValue"
         :max="maxValue"
-        step="1"
+        :step="props.step ?? 1"
         :disabled="disabled"
       />
       <div class="tooltip" :style="{ left: `calc(${percent}% )` }">
@@ -31,12 +31,14 @@ const props = withDefaults(
     modelValue?: number
     disabled?: boolean
     label?: string
+    step?: number
   }>(),
   {
     minValue: 0,
     maxValue: 100,
     disabled: false,
     label: '',
+    step: 1,
   },
 )
 

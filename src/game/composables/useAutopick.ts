@@ -18,11 +18,11 @@ export const useAutopick = () => {
   const generateNumbers = async (totalNumbers: number, animation: boolean = true) => {
     if (!animation) {
       const newNumbers = []
-
+      setSelectedNumbers([])
       while (totalNumbers > newNumbers.length) {
         const newNumber = generateRandomNumber()
 
-        if (newNumbers.indexOf(newNumber) === -1) {
+        if (newNumbers.indexOf(newNumber) === -1 && newNumber > 0) {
           newNumbers.push(newNumber)
         }
       }

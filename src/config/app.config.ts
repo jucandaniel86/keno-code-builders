@@ -70,6 +70,7 @@ export enum SettingMenuType {
   HISTORY = 'history',
   STATISTICS = 'statistics',
   LEADERS = 'leaders',
+  SETTINGS = 'settings',
 }
 
 type InfoModalTab = {
@@ -113,6 +114,14 @@ export const SETTINGS_MENU: InfoModalTab[] = [
     analisis: false,
     disabled: false,
     icon: 'graph-2',
+  },
+  {
+    id: SettingMenuType.SETTINGS,
+    label: 'Settings',
+    title: 'SETTINGS',
+    analisis: false,
+    disabled: false,
+    icon: 'settings',
   },
 ]
 

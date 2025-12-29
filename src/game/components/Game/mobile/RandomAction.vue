@@ -6,6 +6,7 @@ import { useAutopick } from '@/game/composables/useAutopick'
 import { ALLOWED_NUMBERS, DEFAULT_NUMBERS_LIMIT } from '@/config/app.config'
 import AppIcon from '../../Shared/AppIcon.vue'
 import Autopick from '../Autopick.vue'
+import SoundManager from '@/core/core.Sounds'
 
 //types
 type RandomActionComponent = {
@@ -31,13 +32,14 @@ const handleSelectedNumbers = async (numbers: number) => {
 
 const generateRandomNumbers = async () => {
   if (numberOption.value < 1) return
-
+  SoundManager.Instance().play('CLICK')
   disableAction.value = true
-  await generateNumbers(numberOption.value)
+  await generateNumbers(numberOption.value, false)
   disableAction.value = false
 }
 
 const clearNumbers = () => {
+  SoundManager.Instance().play('CLICK')
   setSelectedNumbers([])
 }
 

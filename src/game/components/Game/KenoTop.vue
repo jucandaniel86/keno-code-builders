@@ -7,6 +7,7 @@ import Logo from './Logo.vue'
 import { GAME_TYPES, GAME_TYPES_ENUM } from '@/config/app.config'
 import { useLotteryStore } from '@/stores/lottery'
 import { useI18n } from 'vue-i18n'
+import SoundManager from '@/core/core.Sounds'
 
 //types
 type KenoTopComponent = {
@@ -26,7 +27,7 @@ const { t } = useI18n()
 //methods
 const handleGameChange = (_payload: GAME_TYPES_ENUM) => {
   if (props.disabled) return
-
+  SoundManager.Instance().play('CLICK')
   setActiveGame(_payload)
 }
 </script>

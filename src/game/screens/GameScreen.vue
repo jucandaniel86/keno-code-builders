@@ -72,7 +72,15 @@ onMounted(() => {
             "
           />
 
-          <div class="keno-playtable-container">
+          <div
+            class="keno-playtable-container"
+            :class="{
+              'h-100':
+                [LotteryStatusTypes.BETTING_OPEN, LotteryStatusTypes.BETTING_CLOSE].indexOf(
+                  lotteryStatus,
+                ) === -1,
+            }"
+          >
             <Draw
               v-if="lotteryStatus === LotteryStatusTypes.DRAW_START && results"
               :results="results"

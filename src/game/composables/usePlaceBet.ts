@@ -8,6 +8,7 @@ import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useAlerts } from './useAlerts'
+import SoundManager from '@/core/core.Sounds'
 
 export const usePlaceBet = () => {
   const { t } = useI18n()
@@ -82,7 +83,10 @@ export const usePlaceBet = () => {
     if (!validate()) return
     if (isInsufficientFunds()) return
 
+    SoundManager.Instance().play('PLACE_BET')
+
     const { success, error } = useAlerts()
+    const { setSelectedNumbers } = useGameStore()
 
     const betData = await NetworkController.Instance().bet()
 
@@ -95,7 +99,7 @@ export const usePlaceBet = () => {
     await NetworkController.Instance().bets()
     await NetworkController.Instance().balance()
 
-    selectedNumbers.value = []
+    setSelectedNumbers([])
   }
 
   return {

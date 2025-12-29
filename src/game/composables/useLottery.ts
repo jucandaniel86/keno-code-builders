@@ -31,24 +31,27 @@ export const useLottery = () => {
     }
   }
 
-  watch(lotteryStatus, (newStatus, prevStatus) => {
-    console.log(
-      '%c🎰 LOTTERY%c status %c%s%c → %c%s%c @ %c%s',
-      'padding:2px 8px; background:#111827; color:#f9fafb; border-radius:4px; font-weight:700',
-      'color:#9ca3af; margin-left:6px; font-weight:600',
-      'color:#10b981; font-weight:700',
-      prevStatus ?? 'unknown',
-      'color:#9ca3af; margin:0 6px',
-      'color:#f59e0b; font-weight:700',
-      newStatus,
-      'color:#9ca3af; margin-left:6px',
-      'color:#6b7280',
-      new Date().toLocaleTimeString(),
-    )
-  })
+  const watchLotteryStatus = () => {
+    watch(lotteryStatus, (newStatus, prevStatus) => {
+      console.log(
+        '%c🎰 LOTTERY%c status %c%s%c → %c%s%c @ %c%s',
+        'padding:2px 8px; background:#111827; color:#f9fafb; border-radius:4px; font-weight:700',
+        'color:#9ca3af; margin-left:6px; font-weight:600',
+        'color:#10b981; font-weight:700',
+        prevStatus ?? 'unknown',
+        'color:#9ca3af; margin:0 6px',
+        'color:#f59e0b; font-weight:700',
+        newStatus,
+        'color:#9ca3af; margin-left:6px',
+        'color:#6b7280',
+        new Date().toLocaleTimeString(),
+      )
+    })
+  }
 
   return {
     closeCurrentDraw,
     onDrawAnimationClose,
+    watchLotteryStatus,
   }
 }

@@ -51,11 +51,14 @@ const sortedTickets = computed(() => {
           </tr>
         </thead>
         <tbody :style="{ height: lotteryStatus === 'DRAW_START' ? 'auto' : '60px' }">
-          <TicketMobile
-            v-for="ticket in sortedTickets"
-            :key="`Ticket${ticket.ticketNumber}`"
-            :ticket="ticket"
-          />
+          <TransitionGroup name="list">
+            <TicketMobile
+              v-for="ticket in sortedTickets"
+              :key="`Ticket${ticket.ticketNumber}`"
+              :ticket="ticket"
+              class="keno-bet-mobile"
+            />
+          </TransitionGroup>
         </tbody>
       </table>
     </div>

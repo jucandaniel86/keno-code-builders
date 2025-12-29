@@ -129,6 +129,7 @@ class LotteryMachineCore {
     if (this.opts.playSound) {
       this.audio = new Audio(`${base}${AUDIO_FILE}`)
       this.audio.loop = true
+      this.audio.volume = 0
     }
 
     this.createBalls()
@@ -470,7 +471,9 @@ export function useLotteryMachine(options: LotteryMachineOptions = {}) {
   let core: LotteryMachineCore | null = null
 
   const init = () => {
+    console.log('Initializing Lottery Machine...', targetRef.value)
     if (core || !targetRef.value) return
+
     core = new LotteryMachineCore(targetRef.value, options)
     isReady.value = true
   }

@@ -1,8 +1,13 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 //config
-import { DEFAULT_TAB, SettingMenuType, SETTINGS_MENU } from '@/config/app.config'
+import {
+  DEFAULT_TAB,
+  LotteryStatusTypes,
+  SettingMenuType,
+  SETTINGS_MENU,
+} from '@/config/app.config'
 //components
 import Info from '../info/Info.vue'
 import History from '../info/history.vue'
@@ -14,22 +19,33 @@ import useModalStore from '../../../../stores/modal'
 //composables
 import { useUtils } from '@/core/core.Util'
 import Leaders from '../info/leaders.vue'
+import SoundManager from '@/core/core.Sounds'
+import Settings from '../info/settings.vue'
+import { useLotteryStore } from '@/stores/lottery'
 
 const defaultTab = ref<string>(DEFAULT_TAB)
 const settings_menu = ref(SETTINGS_MENU.filter((menu) => !menu.disabled))
 
 const handleTabClick = (id: string) => {
   defaultTab.value = id
+  SoundManager.Instance().play('CLICK')
 }
 
 //composables
 const { isSet } = useUtils()
 const { closeModal } = useModalStore()
 const { analisis } = storeToRefs(useGameStore())
+const { lotteryStatus } = storeToRefs(useLotteryStore())
 
 const activeTab = computed(() =>
   settings_menu.value.find((setting) => setting.id === defaultTab.value),
 )
+
+watch(lotteryStatus, () => {
+  if (lotteryStatus.value === LotteryStatusTypes.DRAW_START) {
+    closeModal()
+  }
+})
 </script>
 <template>
   <div class="modal-settings">
@@ -51,6 +67,7 @@ const activeTab = computed(() =>
         v-if="activeTab && activeTab.id === SettingMenuType.LEADERS"
         :draws="analisis.statistics.draws"
       />
+      <Settings v-if="activeTab && activeTab.id === SettingMenuType.SETTINGS" />
     </div>
     <div class="modal-settings-right">
       <button

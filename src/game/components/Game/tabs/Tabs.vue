@@ -13,6 +13,7 @@ import { ref } from 'vue'
 import Loading from '../../Shared/Loading.vue'
 import Results from './results/Results.vue'
 import Bets from './bets/Bets.vue'
+import SoundManager from '@/core/core.Sounds'
 
 type TabsComponentType = {
   tabs?: KenoGameTabsE[]
@@ -34,7 +35,11 @@ const currentTab = ref<KenoGameTabsT>(currentTabs.value[0] as any)
 const { t } = useI18n()
 
 //methods
-const onTabChange = (tab: KenoGameTabsT) => (currentTab.value = tab)
+const onTabChange = (tab: KenoGameTabsT) => {
+  if (tab === currentTab.value) return
+  currentTab.value = tab
+  SoundManager.Instance().play('CLICK')
+}
 </script>
 <template>
   <div class="tabs-wrapper">

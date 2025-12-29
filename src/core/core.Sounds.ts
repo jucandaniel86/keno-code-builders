@@ -17,10 +17,10 @@ export default class SoundManager extends Singleton {
   constructor() {
     super()
     const store = useSettingsStore()
-    const { settings } = storeToRefs(store)
+    const { VOLUME_MUSIC, MUTE_BG } = storeToRefs(store)
 
-    this.musicVolume = settings.value.VOLUME_MUSIC
-    this.musicMute = settings.value.MUTE_BG
+    this.musicVolume = VOLUME_MUSIC.value
+    this.musicMute = MUTE_BG.value
   }
 
   public static Instance(): SoundManager {
@@ -108,14 +108,14 @@ export default class SoundManager extends Singleton {
     }
 
     const store = useSettingsStore()
-    const { settings } = storeToRefs(store)
+    const { VOLUME_MUSIC } = storeToRefs(store)
 
-    if (settings.value.VOLUME_MUSIC === 0) return
+    if (VOLUME_MUSIC.value === 0) return
 
     this.resources[soundAlias].sound.pause()
     this.resources[soundAlias].sound.looping = looping
     this.resources[soundAlias].sound.currentTime = 0
-    this.resources[soundAlias].sound.volume = settings.value.VOLUME_MUSIC
+    this.resources[soundAlias].sound.volume = VOLUME_MUSIC.value
     this.resources[soundAlias].sound.play()
 
     this._info('play sound: [' + soundAlias + ']:')

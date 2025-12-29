@@ -9,6 +9,7 @@ import { useGameStore } from '@/stores/game'
 //@ts-ignore
 import { useI18n } from 'vue-i18n'
 import AppIcon from '../Shared/AppIcon.vue'
+import SoundManager from '@/core/core.Sounds'
 
 //types
 type RandomActionComponent = {
@@ -35,22 +36,20 @@ const handleSelectedNumbers = async (numbers: number) => {
 
 const generateRandomNumbers = async () => {
   if (numberOption.value < 1 || disableAction.value || props.disabled) return
-
+  SoundManager.Instance().play('CLICK')
   disableAction.value = true
-  await generateNumbers(numberOption.value)
+  await generateNumbers(numberOption.value, false)
   disableAction.value = false
 }
 
 const clearNumbers = () => {
   if (disableAction.value || props.disabled) return
+  SoundManager.Instance().play('CLICK')
   setSelectedNumbers([])
 }
 
 onMounted(() => {
   numberOption.value = DEFAULT_NUMBERS_LIMIT
-  if (selectedNumbers.value.length === 0) {
-    generateNumbers(DEFAULT_NUMBERS_LIMIT, false)
-  }
 })
 </script>
 
