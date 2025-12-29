@@ -3,7 +3,7 @@
   display: flex;
   gap: 1.5rem;
   flex-direction: row;
-  height: 100%;
+  height: 80%;
   justify-content: flex-end;
   padding-bottom: 1rem;
 }
@@ -11,11 +11,11 @@
 .keno-paytable {
   height: 100%;
   display: flex;
-  flex-grow: 1;
-  padding: 1rem;
+  padding: 0.5rem;
   flex-direction: column;
   gap: 1rem;
   padding-bottom: 0;
+  width: calc(60% - 1rem);
 }
 
 .keno-paytable-numbers-container {
@@ -88,7 +88,8 @@
   .keno-number {
     background-color: transparent;
     border: none;
-    aspect-ratio: 1 / 1;
+    width: 25px;
+    height: 25px;
   }
   .keno-number:hover {
     border: none;
@@ -97,8 +98,12 @@
   .keno-number.selected {
     border: none;
   }
+  .keno-number span {
+    font-size: 0.8rem;
+  }
   .keno-paytable-numbers-container {
     max-width: 350px;
     margin: 0 auto;
+    height: 100%;
   }
 }

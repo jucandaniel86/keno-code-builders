@@ -7,6 +7,14 @@ import { ALLOWED_NUMBERS, DEFAULT_NUMBERS_LIMIT } from '@/config/app.config'
 import AppIcon from '../../Shared/AppIcon.vue'
 import Autopick from '../Autopick.vue'
 
+//types
+type RandomActionComponent = {
+  disabled: boolean
+}
+
+//props
+const props = defineProps<RandomActionComponent>()
+
 //composables
 const { generateNumbers } = useAutopick()
 const { selectedNumbers } = storeToRefs(useGameStore())
@@ -43,21 +51,21 @@ onMounted(() => {
   <div class="keno-bottom-actions-container">
     <button
       class="cancel-selection-btn"
-      :disabled="selectedNumbers.length === 0 || disableAction"
+      :disabled="props.disabled || selectedNumbers.length === 0 || disableAction"
       @click.prevent="clearNumbers"
     >
       <AppIcon icon="close" />
     </button>
 
     <Autopick
-      :disabled="disableAction"
+      :disabled="props.disabled || disableAction"
       :numbers="ALLOWED_NUMBERS"
       :defaultOption="DEFAULT_NUMBERS_LIMIT"
       @onSelect="handleSelectedNumbers"
     />
     <button
       class="random-selection-btn"
-      :disabled="numberOption === 0 || disableAction"
+      :disabled="numberOption === 0 || disableAction || props.disabled"
       @click.prevent="generateRandomNumbers"
     >
       <AppIcon icon="rotate" />

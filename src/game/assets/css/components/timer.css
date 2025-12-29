@@ -40,6 +40,12 @@
   font-size: 2rem;
 }
 
+.prizes-timer {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+
 @keyframes blinker {
   50% {
     opacity: 0;

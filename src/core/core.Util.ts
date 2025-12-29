@@ -61,11 +61,17 @@ export const useUtils = () => {
     )
   }
 
+  const findCommonNumbers = (arr1: number[], arr2: number[]) => {
+    const set2 = new Set(arr2)
+    return [...new Set(arr1)].filter((num) => set2.has(num))
+  }
+
   return {
     getQueryParams,
     isSet,
     isString,
     loadJS,
     kFormatter,
+    findCommonNumbers,
   }
 }

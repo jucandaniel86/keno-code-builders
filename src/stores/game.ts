@@ -84,10 +84,6 @@ export const useGameStore = defineStore('game', () => {
 
   const gameType = ref<GAME_TYPES_ENUM>(GAME_TYPES_ENUM.CLASSIC)
 
-  const displayResults = ref<boolean>(false)
-
-  const results = ref<number[]>()
-
   const resultsHistory = ref<PastResultType[]>([])
 
   const sidebarDisabled = ref<boolean>(false)
@@ -98,16 +94,16 @@ export const useGameStore = defineStore('game', () => {
 
   const analisisLoading = ref<boolean>(false)
 
+  const randomSelectionLoading = ref<boolean>(false)
+
+  const results = ref<number[]>([])
+
   const setGamePlay = (_payload: any) => {
     game.value = {
       ...game.value,
       ..._payload,
     }
   }
-
-  const setDisplayResults = (_payload: boolean) => (displayResults.value = _payload)
-
-  const setResults = (_payload: any) => (results.value = _payload)
 
   const setHistory = (_payload: any) => (history.value = _payload)
 
@@ -129,8 +125,8 @@ export const useGameStore = defineStore('game', () => {
     gameType.value = _payload
   }
 
-  const setResultsHistory = (_result: PastResultType) => {
-    resultsHistory.value.push(_result)
+  const setResults = (_results: number[]) => {
+    results.value = _results
   }
 
   const disableSidebar = (_payload: boolean) => (sidebarDisabled.value = _payload)
@@ -139,40 +135,8 @@ export const useGameStore = defineStore('game', () => {
     winningNumbers.value = []
   }
 
-  const setWinningNumbers = async (_numbers: number[]): Promise<void> => {
-    console.log(_numbers)
-    // const { settings } = storeToRefs(useSettingsStore())
-    // const { calcMultiplier } = useTicketHistory()
-
-    // if (settings.value.INSTANT_BET) {
-    //   winningNumbers.value = _numbers
-    //   setMultipler(calcMultiplier(_numbers, selectedNumbers.value))
-    //   return Promise.resolve()
-    // }
-
-    // return new Promise((resolve) => {
-    //   const numbers = [..._numbers]
-    //   let i = 0
-
-    //   const h = () => {
-    //     setTimeout(
-    //       () => {
-    //         SoundManager.Instance().play('REVEALED')
-    //         winningNumbers.value.push(numbers[i])
-    //         setMultipler(calcMultiplier(winningNumbers.value, selectedNumbers.value))
-    //         i++
-    //         if (numbers.length === i) {
-    //           resolve()
-    //           return
-    //         }
-    //         h()
-    //       },
-    //       i === 0 ? 0 : 150,
-    //     )
-    //   }
-
-    //   h()
-    // })
+  const setRandomSelectionLoading = (_payload: boolean) => {
+    randomSelectionLoading.value = _payload
   }
 
   return {
@@ -182,13 +146,14 @@ export const useGameStore = defineStore('game', () => {
     selectedNumbers,
     disableInteraction,
     gameType,
-    displayResults,
     results,
     resultsHistory,
     sidebarDisabled,
     winningNumbers,
     analisis,
     analisisLoading,
+    randomSelectionLoading,
+    setRandomSelectionLoading,
     disableSidebar,
     setGamePlay,
     setHistory,
@@ -196,10 +161,7 @@ export const useGameStore = defineStore('game', () => {
     setSelectedNumbers,
     setDisabledInteraction,
     setGameType,
-    setDisplayResults,
     setResults,
-    setResultsHistory,
-    setWinningNumbers,
     clearWinningNumbers,
     setAnalisys,
   }

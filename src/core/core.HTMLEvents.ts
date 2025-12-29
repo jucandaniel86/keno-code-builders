@@ -22,9 +22,11 @@ export const useHTMLEvents = () => {
         return setDevice(device.device)
       }
     })
-    const appEl = document.querySelector('#app')
+    const appEl = document.querySelector('#app') as HTMLElement
     if (appEl) {
       appEl.classList.remove('resize')
+      appEl.classList.add(`device-${useAppStore().device}`)
+      appEl.style.height = `${height.value}px`
     }
   }
 

@@ -11,6 +11,15 @@ import { usePlaceBet } from '@/game/composables/usePlaceBet'
 import { DevicesEnum, useAppStore } from '@/stores/app'
 import { useLotteryStore } from '@/stores/lottery'
 import { GAME_TYPES_ENUM } from '@/config/app.config'
+import SlideSelector from '../SlideSelector.vue'
+
+//types
+type BetComponent = {
+  disabled: boolean
+}
+
+//props
+const props = defineProps<BetComponent>()
 
 //composables
 const { t } = useI18n()
@@ -62,11 +71,20 @@ watch(activeGame, () => {
       @stake-selector:increase="updateBetIndex"
       @stake-selector:decrease="updateBetIndex"
       :selected-option="betIndex"
-      :is-disabled="sidebarDisabled"
+      :is-disabled="props.disabled"
     />
-
-    <button class="bet-btn" :disabled="betDisabled || betLoading" @click.prevent="handlePlaceBet">
-      PLACE BET
+    <SlideSelector
+      v-if="device === DevicesEnum.DESKTOP"
+      :max-value="50"
+      :min-value="1"
+      :label="'Draws'"
+    />
+    <button
+      class="bet-btn"
+      :disabled="props.disabled || betDisabled || betLoading"
+      @click.prevent="handlePlaceBet"
+    >
+      {{ t('components.sidebar.placeBet') }}
     </button>
   </div>
 </template>

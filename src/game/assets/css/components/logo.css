@@ -20,6 +20,11 @@
   font-size: 24px;
 }
 
+.menu-btn svg {
+  color: var(--menu-btn-color);
+  fill: var(--menu-btn-color);
+}
+
 .logo-text {
   padding: 0;
   margin: 0;

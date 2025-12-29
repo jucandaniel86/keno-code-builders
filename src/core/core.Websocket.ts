@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { HEARTBEAT_INTERVAL, WS_RECONNECT } from '@/config/app.config'
+import { HEARTBEAT_INTERVAL, LotteryStatusTypes, WS_RECONNECT } from '@/config/app.config'
 import ErrorManager from './core.ErrorManager'
 import Logger from './core.Logger'
 import { useUtils } from './core.Util'
@@ -15,6 +15,8 @@ import type BetsResponseData from './models/bets/BetsResponseData'
 import { useLotteryStore } from '@/stores/lottery'
 import type BalanceRequestData from './models/balance/BalanceRequestData'
 import type BalanceResponseData from './models/balance/BalanceResponseData'
+import type ResultsRequestData from './models/results/ResultsRequestData'
+import type ResultsResponseData from './models/results/ResultsResponseData'
 
 enum BROADCAST_RESPONSE_TYPES {
   CLOSE = 'close',
@@ -205,6 +207,15 @@ export default class WebsocketConnector extends Logger {
   }
 
   /**
+   *
+   * @param request
+   * @returns
+   */
+  public async requestResults(request: ResultsRequestData): Promise<ResultsResponseData> {
+    return this.serverRequest(request)
+  }
+
+  /**
    * @void
    */
   private startHeartbeat() {
@@ -239,7 +250,7 @@ export default class WebsocketConnector extends Logger {
   private getBroadcast() {
     this.webSocket!.addEventListener('message', (message: any) => {
       const messageData = JSON.parse(message.data)
-      const { setLottery } = useLotteryStore()
+      const { setLottery, setLotteryStatus } = useLotteryStore()
       const { setResults } = useGameStore()
       const { isSet } = useUtils()
 
@@ -249,9 +260,11 @@ export default class WebsocketConnector extends Logger {
         switch (messageData.broadcast.requestType) {
           case BROADCAST_RESPONSE_TYPES.CLOSE:
             setLottery({ bettingOpen: false })
+            setLotteryStatus(LotteryStatusTypes.BETTING_CLOSE)
             break
           case BROADCAST_RESPONSE_TYPES.RESULTS:
             setResults(messageData.broadcast.lottery.numbers)
+            setLotteryStatus(LotteryStatusTypes.DRAW_START)
             setLottery({
               drawNumber: messageData.broadcast.lottery.drawNumber,
               nextDrawNumber: messageData.broadcast.lottery.nextDrawNumber,

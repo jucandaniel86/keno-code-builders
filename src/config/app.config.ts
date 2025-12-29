@@ -18,6 +18,7 @@ export const MIN_RANDOM_BALL = 1
 export const MAX_RANDOM_BALL = 80
 export const MAX_SELECTED_NUMBERS = 10
 export const MIN_SELECTED_NUMBERS = 2
+export const MAX_DAWED_BALLS = 20
 
 export const AUTOPLAY_MAX_NO_BETS = 100
 export const PAST_RESULTS_LIMIT = 6
@@ -162,24 +163,28 @@ export const GAME_TYPES = [
     label: 'Classic',
     value: GAME_TYPES_ENUM.CLASSIC,
     type: 1,
+    alias: 'Classic',
   },
   {
     id: 'jackpot',
     label: 'Jackpot',
     value: GAME_TYPES_ENUM.JACKPOT,
     type: 2,
+    alias: 'Jackpot',
   },
   {
     id: 'bonus',
     label: 'Bonus',
     value: GAME_TYPES_ENUM.BONUS,
     type: 3,
+    alias: 'Bonus',
   },
   {
     id: 'hot',
     label: 'Heads or Tails',
     value: GAME_TYPES_ENUM.HOT,
     type: 4,
+    alias: 'HOT',
   },
 ]
 
@@ -219,3 +224,13 @@ export const HOT_SELECTION_TYPES: HotBallType[] = [
 
 export const MAX_TRENDS_LIMIT = 8
 export const DEFAULT_NUMBERS_LIMIT = 10
+
+//Lottery Status
+export enum LotteryStatusTypes {
+  UNKNOW = 'UNKNOW',
+  BETTING_OPEN = 'BETTING_OPEN',
+  BETTING_CLOSE = 'BETTING_CLOSE',
+  DRAW_START = 'DRAW_START',
+  DRAW_ENDS = 'DRAW_ENDS',
+  DISPLAY_RESULTS = 'DISPLAY_RESULTS',
+}

@@ -1,0 +1,98 @@
+#results-canvas {
+  border: 1px solid red;
+  width: 600px;
+  height: 400px;
+}
+
+.results-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  flex-direction: column;
+  z-index: 1;
+  background: linear-gradient(135deg, rgb(102, 126, 234) 0%, rgb(118, 75, 162) 100%);
+}
+
+.number-display {
+  font-weight: bold;
+  font-family: 'Roboto', monospace;
+  letter-spacing: -8px;
+  text-align: center;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.number,
+.currency {
+  font-size: 80px;
+  display: inline-block;
+  background: linear-gradient(135deg, #36a386 0%, #2a8070 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-text-stroke: 2px #36a386;
+  background-color: rgba(54, 163, 134, 0.1);
+  text-shadow:
+    0 4px 12px rgba(54, 163, 134, 0.5),
+    0 2px 4px rgba(54, 163, 134, 0.3);
+  box-shadow: inset 0 0 8px rgba(54, 163, 134, 0.2);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+.win-label {
+  font-size: 48px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffd700 0%, #ffb700 50%, #ffed4e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 3px 6px rgba(255, 215, 0, 0.6));
+  animation: pulse 1.5s ease-in-out infinite;
+  letter-spacing: 2px;
+  background-size: 200% 200%;
+}
+
+.lose-label {
+  font-size: 48px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #8b0000 0%, #dc143c 50%, #696969 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 3px 6px rgba(139, 0, 0, 0.6));
+  animation: fadePulse 1.5s ease-in-out infinite;
+  letter-spacing: 2px;
+  background-size: 200% 200%;
+}
+
+.amount-container {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.results-message {
+  color: #000;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+}

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BETTING_WARNING_SECONDS, GAME_NAME } from '@/config/app.config'
+import { BETTING_WARNING_SECONDS, GAME_NAME, GAME_TYPES_ENUM } from '@/config/app.config'
 import { useLotteryStore } from '@/stores/lottery'
 import { storeToRefs } from 'pinia'
 import { computed, onMounted, ref, watch } from 'vue'
@@ -9,6 +9,7 @@ import { DevicesEnum, useAppStore } from '@/stores/app'
 const { nextDrawSeconds, drawNumber, nextTimestamp, lastTimestamp, activeGame } =
   storeToRefs(useLotteryStore())
 const { device } = storeToRefs(useAppStore())
+
 const TOTAL_SECONDS = ref(
   (new Date(nextTimestamp.value).getTime() - new Date(lastTimestamp.value).getTime()) / 1000,
 )
@@ -70,10 +71,10 @@ watch(nextDrawSeconds, () => {
         <span>{{ activeGame }}</span>
         <span class="draw-number">#{{ drawNumber }}</span>
       </div>
-      <Prizes />
+      <Prizes v-if="activeGame !== GAME_TYPES_ENUM.HOT" />
     </div>
 
-    <div class="timer-progress-wrapper">
+    <div class="timer-progress-wrapper" v-if="device === DevicesEnum.DESKTOP">
       <span class="timer-seconds" :class="{ betwarning: warning }">{{ timerSeconds }}</span>
       <span class="timer-status-text" :class="{ betwarning: warning }">Please place your bets</span>
     </div>

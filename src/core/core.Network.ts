@@ -12,6 +12,7 @@ import {
   DEFAULT_SOCKET_SERVER_PATH,
   GAME_ID,
   GAME_TYPES_ENUM,
+  LotteryStatusTypes,
 } from '@/config/app.config'
 import type PlayerDetailsData from './models/PlayerDetailsData'
 import BetRequestData from './models/bet/BetRequestData'
@@ -25,6 +26,8 @@ import { useLotteryStore } from '@/stores/lottery'
 import BalanceRequestData from './models/balance/BalanceRequestData'
 import { storeToRefs } from 'pinia'
 import { useGameStore } from '@/stores/game'
+import ResultsResponseData from './models/results/ResultsResponseData'
+import ResultsRequestData from './models/results/ResultsRequestData'
 
 export default class NetworkController extends Singleton {
   public serverProtocol: string = ''
@@ -227,7 +230,8 @@ export default class NetworkController extends Singleton {
 
   public async setup(): Promise<SetupResponseData | null> {
     const { isSet } = useUtils()
-    const { setLottery } = useLotteryStore()
+    const { setLottery, setLotteryStatus } = useLotteryStore()
+
     if (this.isAuthenticated() === true) {
       return this.ws.requestNextGame(this.generateSetupData() as any).then((response: any) => {
         if (isSet(response.lottery)) {
@@ -235,6 +239,15 @@ export default class NetworkController extends Singleton {
         }
 
         if (isSet(response.credit) === true) this.updateSessionID(response.playerDetails)
+
+        if (isSet(response.lottery) && isSet(response.lottery.bettingOpen)) {
+          if (response.lottery.bettingOpen && response.lottery.drawClosesSeconds > 0) {
+            setLotteryStatus(LotteryStatusTypes.BETTING_OPEN)
+          }
+          if (!response.lottery.bettingOpen || response.lottery.drawClosesSeconds <= 0) {
+            setLotteryStatus(LotteryStatusTypes.BETTING_CLOSE)
+          }
+        }
 
         return response
       })
@@ -288,6 +301,47 @@ export default class NetworkController extends Singleton {
             credit: response.credit,
           })
         }
+      })
+    }
+    return null
+  }
+
+  private generateLastResultsData = () => {
+    const finalRequest = new ResultsRequestData()
+    finalRequest.sessionID = this.loginRequestData.sessionID
+    finalRequest.requestType = 'game'
+    return finalRequest
+  }
+
+  /**
+   *
+   * @returns {Promise<ResultsResponseData | null>}
+   */
+  public async getLastResults(): Promise<ResultsResponseData | null | void> {
+    const { isSet } = useUtils()
+
+    if (this.isAuthenticated()) {
+      return this.ws.requestResults(this.generateLastResultsData() as any).then((response) => {
+        //totalWinOnLastDraw
+        if (isSet(response.credit) === true) {
+          const { setSessionData } = useSessionStore()
+          const { setStatusData } = useStatusStore()
+
+          setStatusData({
+            credit: response.credit?.amount,
+          })
+
+          setSessionData({
+            credit: response.credit,
+          })
+        }
+
+        if (isSet(response.lottery) && isSet(response.lottery.totalWinOnLastDraw)) {
+          const { setLastResult } = useLotteryStore()
+          setLastResult(response.lottery.totalWinOnLastDraw)
+        }
+
+        return response
       })
     }
     return null

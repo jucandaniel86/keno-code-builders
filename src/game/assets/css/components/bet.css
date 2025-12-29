@@ -28,6 +28,7 @@
 .input-wrapper {
   background-color: var(--stake-selector-input-bgcolor);
   height: 100%;
+  flex: 1;
 }
 
 .input-wrapper input {

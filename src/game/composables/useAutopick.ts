@@ -1,10 +1,10 @@
 import { MAX_RANDOM_BALL } from '@/config/app.config'
-import SoundManager from '@/core/core.Sounds'
+// import SoundManager from '@/core/core.Sounds'
 import { useGameStore } from '@/stores/game'
 import { storeToRefs } from 'pinia'
 
 export const useAutopick = () => {
-  const { setSelectedNumbers } = useGameStore()
+  const { setSelectedNumbers, setRandomSelectionLoading } = useGameStore()
 
   const generateRandomNumber = () => {
     const { selectedNumbers } = storeToRefs(useGameStore())
@@ -19,7 +19,7 @@ export const useAutopick = () => {
     if (!animation) {
       const newNumbers = []
 
-      while (totalNumbers >= newNumbers.length) {
+      while (totalNumbers > newNumbers.length) {
         const newNumber = generateRandomNumber()
 
         if (newNumbers.indexOf(newNumber) === -1) {
@@ -29,7 +29,7 @@ export const useAutopick = () => {
       setSelectedNumbers(newNumbers)
       return
     }
-
+    setRandomSelectionLoading(true)
     return new Promise((resolve) => {
       const { selectedNumbers } = storeToRefs(useGameStore())
 
@@ -39,9 +39,9 @@ export const useAutopick = () => {
 
       const NumbersToGenerate =
         selectedNumbers.value.length === totalNumbers
-          ? totalNumbers
+          ? 0
           : totalNumbers - selectedNumbers.value.length
-
+      console.log('NumbersToGenerate', NumbersToGenerate)
       let d = 0
       const h = () => {
         setTimeout(
@@ -51,9 +51,10 @@ export const useAutopick = () => {
             setSelectedNumbers([...selectedNumbers.value, newNumber])
 
             d++
-            SoundManager.Instance().play('CLICK')
+            // SoundManager.Instance().play('CLICK')
             if (d >= NumbersToGenerate) {
               //ended
+              setRandomSelectionLoading(false)
               return resolve(true)
             }
             h()

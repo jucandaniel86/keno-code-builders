@@ -3,12 +3,12 @@ import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 
 export const useHistory = () => {
-  const { futureDraws } = storeToRefs(useLotteryStore())
+  const { previousDraws } = storeToRefs(useLotteryStore())
 
   const tickets = computed(() => {
     const result: any = []
 
-    futureDraws.value.forEach((ticket: any) => {
+    previousDraws.value.forEach((ticket: any) => {
       const currentDrawID = ticket.drawNumber
       const currentDrawExists = result.find((element: any) => element.drawNumber === currentDrawID)
 

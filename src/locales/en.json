@@ -1,10 +1,15 @@
 {
   "components": {
     "game": {
-      "select": "Select 1-10 numbers to play"
+      "select": "Select 1-10 numbers to play",
+      "winMessage": "Congratulations!",
+      "lostMessageText": "Better luck next time!",
+      "win": "Win",
+      "lose": "Lose"
     },
     "sidebar": {
-      "betAmount": "Bet Amount"
+      "betAmount": "Bet Amount",
+      "placeBet": "PLACE BET"
     },
     "settings": {
       "instantBet": "Instant Bet",
@@ -82,7 +87,8 @@
     "random": "Random Selection"
   },
   "header": {
-    "clock": "Time"
+    "clock": "Time",
+    "balance": "Balance"
   },
   "tabs": {
     "bets": "New Bets",

@@ -1,4 +1,4 @@
-import { GAME_TYPES_ENUM } from '@/config/app.config'
+import { GAME_TYPES_ENUM, LotteryStatusTypes } from '@/config/app.config'
 import { useUtils } from '@/core/core.Util'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
@@ -49,7 +49,7 @@ export type NewBetType = {
 }
 
 export const useLotteryStore = defineStore('lottery', () => {
-  //models
+  //lottery
   const maxWinCurrency = ref<string>('')
   const maxWin = ref<number>(0)
   const prizes = ref<PrizeType[]>([])
@@ -67,6 +67,12 @@ export const useLotteryStore = defineStore('lottery', () => {
   //game type
   const activeGame = ref<GAME_TYPES_ENUM>(GAME_TYPES_ENUM.CLASSIC)
   const hotBetOption = ref<string>('T')
+  //extracted numbers
+  const extractedNumbers = ref<number[]>([])
+  //lottery status
+  const lotteryStatus = ref<LotteryStatusTypes>(LotteryStatusTypes.UNKNOW)
+  //last result
+  const lastResult = ref<number | null>(null)
 
   const setLottery = (_payload: any) => {
     const { isSet } = useUtils()
@@ -144,6 +150,22 @@ export const useLotteryStore = defineStore('lottery', () => {
     hotBetOption.value = _payload
   }
 
+  const setExtractedNumbers = (_number: number) => {
+    extractedNumbers.value.push(_number)
+  }
+
+  const clearExtractedNumbers = () => {
+    extractedNumbers.value = []
+  }
+
+  const setLotteryStatus = (_status: LotteryStatusTypes) => {
+    lotteryStatus.value = _status
+  }
+
+  const setLastResult = (_payload: number | null) => {
+    lastResult.value = _payload
+  }
+
   return {
     maxWinCurrency,
     maxWin,
@@ -160,9 +182,16 @@ export const useLotteryStore = defineStore('lottery', () => {
     previousDraws,
     activeGame,
     hotBetOption,
+    extractedNumbers,
+    lotteryStatus,
+    lastResult,
     setLottery,
     setTickets,
     setActiveGame,
     setHOTBetOption,
+    setExtractedNumbers,
+    clearExtractedNumbers,
+    setLotteryStatus,
+    setLastResult,
   }
 })

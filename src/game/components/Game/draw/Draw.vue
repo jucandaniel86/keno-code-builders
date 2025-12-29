@@ -1,41 +1,39 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { useDrawAnimation } from './Draw.animation'
+import { nextTick, onMounted } from 'vue'
+import { useLotteryStore } from '@/stores/lottery'
+import { useLotteryMachine } from './useLotteryMatchine'
 
+//types
 type DrawComponent = {
   results: number[]
 }
+//props
 const props = defineProps<DrawComponent>()
 
-const { startDraw, status, canvas, drawedBalls } = useDrawAnimation()
+//composables
+const { setExtractedNumbers } = useLotteryStore()
+
+const { run, targetRef } = useLotteryMachine({
+  playSound: true,
+  onBallDrawn: (ballNumber: number) => {
+    console.log('Drawn ball:', ballNumber)
+    setExtractedNumbers(ballNumber)
+  },
+})
 
 //emitters
 const emitters = defineEmits(['onAnimationEnds'])
 
+//mounted
 onMounted(async () => {
-  await startDraw(props.results, {
-    delayBetween: 1000,
-  })
+  await nextTick()
+  await run(props.results)
+
   emitters('onAnimationEnds')
 })
 </script>
 <template>
   <div class="draw-container">
-    <div class="status">{{ status }}</div>
-    <div class="current-ball"></div>
-    <canvas :ref="canvas" id="canvas-draw-animation" width="400" height="320"></canvas>
-    <div class="results">
-      <div
-        v-for="(result, i) in drawedBalls"
-        :key="`Result${i}`"
-        class="ball-small"
-        :style="{ '--accent': result.color }"
-      >
-        {{ result.num }}
-      </div>
-    </div>
+    <div ref="targetRef" />
   </div>
 </template>
-<style scoped>
-@import url('./Draw.css');
-</style>
