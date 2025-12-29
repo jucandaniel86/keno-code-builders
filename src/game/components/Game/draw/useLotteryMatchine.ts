@@ -15,6 +15,8 @@ export interface LotteryMachineOptions {
   waitInterval?: number
   playSound?: boolean
   assetsBase?: string // path to folder containing Images/ and backgroundAudio.wav
+  spinSpeedMultiplier?: number
+  blurStrength?: number
   onFinish?: (numbers: LotteryNumbers) => void
   onBallDrawn?: (ballNumber: number, drawIndex: number) => void
 }
@@ -76,6 +78,8 @@ class LotteryMachineCore {
       waitInterval: options.waitInterval ?? 1000,
       playSound: options.playSound ?? false,
       assetsBase: base,
+      spinSpeedMultiplier: options.spinSpeedMultiplier ?? 4,
+      blurStrength: options.blurStrength ?? 0.35,
       onFinish: options.onFinish ?? (() => {}),
       onBallDrawn: options.onBallDrawn ?? (() => {}),
     }
@@ -279,6 +283,21 @@ class LotteryMachineCore {
         this.resetPicked = false
       }
 
+      const speedMagnitude = Math.hypot(curBall.x - curBall.lastX, curBall.y - curBall.lastY)
+      const blurAmount =
+        !this.pause && speedMagnitude > 0 ? Math.min(10, speedMagnitude * this.opts.blurStrength) : 0
+
+      if (blurAmount > 0) {
+        this.ctx.save()
+        this.ctx.filter = `blur(${blurAmount}px)`
+        this.ctx.globalAlpha = 0.35
+        this.ctx.beginPath()
+        this.ctx.arc(curBall.x, curBall.y, curBall.r, 0, Math.PI * 2)
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.9)'
+        this.ctx.fill()
+        this.ctx.restore()
+      }
+
       this.ctx.beginPath()
       this.ctx.arc(curBall.x, curBall.y, curBall.r, 0, Math.PI * 2)
       this.ctx.closePath()
@@ -374,8 +393,9 @@ class LotteryMachineCore {
         } else {
           curBall.lastX = curBall.x
           curBall.lastY = curBall.y
-          curBall.x += curBall.dx
-          curBall.y += curBall.dy
+          const spinMultiplier = this.pause ? 1 : this.opts.spinSpeedMultiplier
+          curBall.x += curBall.dx * spinMultiplier
+          curBall.y += curBall.dy * spinMultiplier
           const dx = curBall.x - this.opts.containerRadius
           const dy = curBall.y - this.opts.containerRadius
           const distanceFromCenter = Math.sqrt(dx * dx + dy * dy)
