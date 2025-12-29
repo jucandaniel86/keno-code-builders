@@ -47,8 +47,8 @@
   padding: 0.5rem;
   font-size: var(--keno-number-font-size);
   border: var(--keno-number-border);
-  width: var(--keno-number-width);
-  height: var(--keno-number-height);
+  width: 100%;
+  height: 100%;
 }
 
 .keno-number.hot span {
@@ -88,6 +88,8 @@
   .keno-number {
     background-color: transparent;
     border: none;
+    width: 23px;
+    height: 23px;
   }
   .keno-number:hover {
     border: none;
@@ -103,9 +105,5 @@
     max-width: 350px;
     margin: 0 auto;
     height: 100%;
-  }
-
-  .slide-wrapper {
-    width: calc(100% - 50px);
   }
 }

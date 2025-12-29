@@ -164,13 +164,12 @@ button:disabled {
 
 @media (max-width: 950px) {
   .keno-playtable-container {
-    flex-direction: row;
     gap: 0.5rem;
-    height: 40%;
+    height: 45%;
+    flex-direction: column;
   }
   .keno-bottom-actions-container {
     flex-direction: column;
-    max-width: 70px;
   }
   .keno-autopick {
     border: none;
@@ -201,11 +200,9 @@ button:disabled {
 }
 
 @media (max-width: 641px) {
-  .keno-bottom-actions-container {
-    max-width: 25px;
-  }
   .keno-autopick {
     border: none;
+    padding: 0;
   }
   .cancel-selection-btn svg,
   .random-selection-btn svg {
@@ -214,6 +211,19 @@ button:disabled {
   }
   .keno-autopick-number {
     font-size: 1rem;
+  }
+  .keno-bottom-actions-container {
+    flex-direction: row;
+  }
+  .keno-autopick-wrapper {
+    flex-direction: row;
+  }
+  .keno-autopick-btn.keno-autopick-next svg {
+    transform: rotate(-90deg);
+  }
+
+  .keno-autopick-btn.keno-autopick-prev svg {
+    transform: rotate(90deg);
   }
 }
 
