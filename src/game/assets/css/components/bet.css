@@ -12,10 +12,8 @@
 .input-wrap {
   width: 100%;
   display: flex;
-  flex-shrink: 0;
   height: 44px;
   margin-bottom: 1rem;
-  justify-content: flex-start !important;
 }
 
 .stake-container {

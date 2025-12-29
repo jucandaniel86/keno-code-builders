@@ -14,6 +14,11 @@
   color: #fff;
 }
 
+.loading-logo__wrapper sup {
+  font-size: 0.7rem;
+  color: var(--light-color);
+}
+
 .loader {
   --loader-size: calc(var(--block-size) / 2);
   --loader-size-half: calc(var(--loader-size) / 2);

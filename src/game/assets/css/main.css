@@ -78,13 +78,12 @@ body {
 }
 
 .keno-play-actions {
-  width: 40%;
+  width: 300px;
   justify-content: flex-start;
   flex-direction: column;
   gap: 1rem;
   display: flex;
   height: 100%;
-  padding-right: 1rem;
   overflow: hidden;
 }
 
@@ -161,7 +160,6 @@ button:disabled {
 .keno-playtable-container {
   position: relative;
   display: flex;
-  flex: 1;
 }
 
 @media (max-width: 950px) {
@@ -204,10 +202,18 @@ button:disabled {
 
 @media (max-width: 641px) {
   .keno-bottom-actions-container {
-    max-width: 40px;
+    max-width: 25px;
   }
   .keno-autopick {
     border: none;
+  }
+  .cancel-selection-btn svg,
+  .random-selection-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+  .keno-autopick-number {
+    font-size: 1rem;
   }
 }
 
