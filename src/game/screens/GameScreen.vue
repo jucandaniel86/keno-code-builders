@@ -95,7 +95,7 @@ const betActions = computed(() => {
             v-if="device === DevicesEnum.DESKTOP && activeGame !== GAME_TYPES_ENUM.HOT"
             :disabled="randomActionState"
           />
-          <MobileActions v-if="device !== DevicesEnum.DESKTOP" :disabled="betActions" />
+          <MobileActions :disabled="betActions" />
         </div>
         <div v-if="device === DevicesEnum.DESKTOP" class="keno-play-actions">
           <Bet :disabled="betActions" />

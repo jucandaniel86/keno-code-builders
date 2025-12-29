@@ -13,7 +13,7 @@ import { computed } from 'vue'
 import { useUtils } from '@/core/core.Util'
 
 //composables
-const { nextDraw, extractedNumbers } = storeToRefs(useLotteryStore())
+const { nextDraw, extractedNumbers, lotteryStatus } = storeToRefs(useLotteryStore())
 const { device } = storeToRefs(useAppStore())
 const { findCommonNumbers } = useUtils()
 
@@ -50,7 +50,7 @@ const sortedTickets = computed(() => {
             <th>Bet</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody :style="{ height: lotteryStatus === 'DRAW_START' ? 'auto' : '60px' }">
           <TicketMobile
             v-for="ticket in sortedTickets"
             :key="`Ticket${ticket.ticketNumber}`"

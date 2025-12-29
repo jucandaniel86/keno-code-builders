@@ -28,7 +28,7 @@ onMounted(async () => {
   <ModalWindow />
   <Icons />
   <TransitionGroup name="fade">
-    <LoadingScreen v-if="screen === ScreenEnum.LOADING" />
-    <GameScreen v-if="screen === ScreenEnum.GAME" />
+    <LoadingScreen v-if="screen === ScreenEnum.LOADING" key="LoadingScreen" />
+    <GameScreen v-if="screen === ScreenEnum.GAME" key="GameScreen" />
   </TransitionGroup>
 </template>
