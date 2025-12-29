@@ -17,6 +17,9 @@
   --btn-red-bgcolor: #fb0256;
 
   --keno-type-classic-color: #fbc94a;
+  --keno-type-jackpot-color: #38a4d0;
+  --keno-type-bonus-color: #1c9464;
+  --keno-type-hot-color: #fb0256;
 
   /* TOP */
   --top-container-boxshadow: #0003 0 4px 6px -1px, #0000001f 0 2px 4px -1px;

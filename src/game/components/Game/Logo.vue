@@ -13,7 +13,7 @@ const handleMenuClick = () => {
 <template>
   <div class="logo-container">
     <button class="menu-btn" @click.prevent="handleMenuClick">
-      <AppIcon :icon="'menu'" fill="#fff" />
+      <AppIcon :icon="'keno-menu'" />
     </button>
     <h1 class="logo-text">
       KENO <sup>v.{{ Pk.version }}</sup>

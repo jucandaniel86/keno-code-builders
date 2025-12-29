@@ -1,11 +1,15 @@
 <template>
   <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden">
     <defs>
+      <symbol id="keno-menu" viewBox="0 0 24 24" fill="none">
+        <path d="M4 6.5h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        <path d="M4 12h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        <path d="M4 17.5h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </symbol>
       <symbol id="menu" viewBox="0 0 24 24" fill="none">
-        <path
-          fill="currentColor"
-          d="M19 4H5a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1m.15 6H4.85a.85.85 0 0 0-.85.85v2.3c0 .47.38.85.85.85h14.3c.47 0 .85-.38.85-.85v-2.3a.85.85 0 0 0-.85-.85M19 16H5a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"
-        />
+        <path d="M4 6.5h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        <path d="M4 12h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        <path d="M4 17.5h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
       </symbol>
 
       <symbol id="home" viewBox="0 0 24 24" fill="none">

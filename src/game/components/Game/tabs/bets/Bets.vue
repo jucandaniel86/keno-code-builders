@@ -57,6 +57,7 @@ const sortedTickets = computed(() => {
               :key="`Ticket${ticket.ticketNumber}`"
               :ticket="ticket"
               class="keno-bet-mobile"
+              :matches="extractedNumbers"
             />
           </TransitionGroup>
         </tbody>

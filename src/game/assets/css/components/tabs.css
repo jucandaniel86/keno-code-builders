@@ -186,6 +186,44 @@
   border-left: 2px solid var(--keno-type-classic-color);
 }
 
+.keno-bets-table-mobile tbody tr.JACKPOT {
+  border-left: 2px solid var(--keno-type-jackpot-color);
+}
+
+.keno-bets-table-mobile tbody tr.BONUS {
+  border-left: 2px solid var(--keno-type-bonus-color);
+}
+
+.keno-bets-table-mobile tbody tr.HEADSORTAILS {
+  border-left: 2px solid var(--keno-type-hot-color);
+}
+
+.keno-bet-matches {
+  display: inline-flex;
+  padding: 0.2rem;
+  height: 100%;
+  text-align: center;
+  float: left;
+  color: #fff;
+  margin-right: 0.2rem;
+}
+
+.keno-bets-table-mobile tbody tr.CLASSIC .keno-bet-matches {
+  background-color: var(--keno-type-classic-color);
+}
+
+.keno-bets-table-mobile tbody tr.JACKOT .keno-bet-matches {
+  background-color: var(--keno-type-jackpot-color);
+}
+
+.keno-bets-table-mobile tbody tr.BONUS .keno-bet-matches {
+  background-color: var(--keno-type-bonus-color);
+}
+
+.keno-bets-table-mobile tbody tr.HEADSORTAILS .keno-bet-matches {
+  background-color: var(--keno-type-hot-color);
+}
+
 @media (max-width: 641px) {
   .tab-menu-btn {
     color: var(--tab-btn-mobile-textcolor);
