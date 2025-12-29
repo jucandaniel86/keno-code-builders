@@ -44,7 +44,6 @@ const clearNumbers = () => {
 onMounted(() => {
   //@todo
   numberOption.value = DEFAULT_NUMBERS_LIMIT
-  generateRandomNumbers()
 })
 </script>
 <template>

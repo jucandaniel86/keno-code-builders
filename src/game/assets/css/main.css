@@ -166,7 +166,7 @@ button:disabled {
   .keno-playtable-container {
     gap: 0.5rem;
     height: 45%;
-    flex-direction: column;
+    flex-direction: row;
   }
   .keno-bottom-actions-container {
     flex-direction: column;
@@ -213,17 +213,11 @@ button:disabled {
     font-size: 1rem;
   }
   .keno-bottom-actions-container {
-    flex-direction: row;
+    flex-direction: column;
+    max-width: 30px;
   }
   .keno-autopick-wrapper {
-    flex-direction: row;
-  }
-  .keno-autopick-btn.keno-autopick-next svg {
-    transform: rotate(-90deg);
-  }
-
-  .keno-autopick-btn.keno-autopick-prev svg {
-    transform: rotate(90deg);
+    flex-direction: column;
   }
 }
 

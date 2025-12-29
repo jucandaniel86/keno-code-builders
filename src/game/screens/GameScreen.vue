@@ -7,7 +7,12 @@ import KenoTop from '../components/Game/KenoTop.vue'
 import Tabs from '../components/Game/tabs/Tabs.vue'
 import { storeToRefs } from 'pinia'
 import { DevicesEnum, useAppStore } from '@/stores/app'
-import { GAME_TYPES_ENUM, KenoGameTabsE, LotteryStatusTypes } from '@/config/app.config'
+import {
+  DEFAULT_NUMBERS_LIMIT,
+  GAME_TYPES_ENUM,
+  KenoGameTabsE,
+  LotteryStatusTypes,
+} from '@/config/app.config'
 import MobileActions from '../components/Game/mobile/MobileActions.vue'
 import RandomAction from '../components/Game/mobile/RandomAction.vue'
 import { useLotteryStore } from '@/stores/lottery'
@@ -15,14 +20,15 @@ import HotComponent from '../components/Game/HotComponent.vue'
 import { useGameStore } from '@/stores/game'
 import Draw from '../components/Game/draw/Draw.vue'
 import { useLottery } from '../composables/useLottery'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import Results from '../components/Game/results/Results.vue'
 import { useUtils } from '@/core/core.Util'
+import { useAutopick } from '../composables/useAutopick'
 
 const { isSet } = useUtils()
 const { device } = storeToRefs(useAppStore())
 const { activeGame, lotteryStatus, lastResult } = storeToRefs(useLotteryStore())
-const { results, randomSelectionLoading } = storeToRefs(useGameStore())
+const { results, randomSelectionLoading, selectedNumbers } = storeToRefs(useGameStore())
 const { closeCurrentDraw, onDrawAnimationClose } = useLottery()
 
 //button states
@@ -40,9 +46,18 @@ const betActions = computed(() => {
   return lotteryStatus.value !== LotteryStatusTypes.BETTING_OPEN
 })
 
+//composables
+const { generateNumbers } = useAutopick()
+
 // const customDrawNumbers: number[] = [
 //   1, 5, 12, 18, 22, 29, 33, 37, 42, 48, 11, 14, 19, 23, 27, 31, 36, 40, 44, 49,
 // ]
+
+onMounted(() => {
+  if (selectedNumbers.value.length === 0) {
+    generateNumbers(DEFAULT_NUMBERS_LIMIT, false)
+  }
+})
 </script>
 <template>
   <div class="keno-container">
@@ -56,6 +71,7 @@ const betActions = computed(() => {
               (lotteryStatus !== LotteryStatusTypes.DRAW_START && device === DevicesEnum.MOBILE)
             "
           />
+
           <div class="keno-playtable-container">
             <Draw
               v-if="lotteryStatus === LotteryStatusTypes.DRAW_START && results"

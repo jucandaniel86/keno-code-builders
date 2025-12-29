@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BETTING_WARNING_SECONDS, GAME_NAME, GAME_TYPES_ENUM } from '@/config/app.config'
+import { BETTING_WARNING_SECONDS, GAME_NAME } from '@/config/app.config'
 import { useLotteryStore } from '@/stores/lottery'
 import { storeToRefs } from 'pinia'
 import { computed, onMounted, ref, watch } from 'vue'
@@ -71,7 +71,7 @@ watch(nextDrawSeconds, () => {
         <span>{{ activeGame }}</span>
         <span class="draw-number">#{{ drawNumber }}</span>
       </div>
-      <Prizes v-if="activeGame !== GAME_TYPES_ENUM.HOT" />
+      <Prizes />
     </div>
 
     <div class="timer-progress-wrapper" v-if="device === DevicesEnum.DESKTOP">
