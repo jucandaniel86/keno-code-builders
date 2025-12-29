@@ -24,7 +24,7 @@ const ticketNumberMatches = computed(() => {
 </script>
 <template>
   <tr class="keno-bet-mobile" :class="props.ticket.kenoGameType">
-    <td>
+    <td class="match-column">
       <span class="keno-bet-matches" v-if="props.matches.length > 0">{{
         ticketNumberMatches
       }}</span>

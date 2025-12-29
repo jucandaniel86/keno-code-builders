@@ -198,21 +198,28 @@
   border-left: 2px solid var(--keno-type-hot-color);
 }
 
+.match-column {
+  display: flex;
+  align-items: center;
+}
+
 .keno-bet-matches {
   display: inline-flex;
   padding: 0.2rem;
-  height: 100%;
+  height: 25px;
   text-align: center;
-  float: left;
   color: #fff;
   margin-right: 0.2rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
 }
 
 .keno-bets-table-mobile tbody tr.CLASSIC .keno-bet-matches {
   background-color: var(--keno-type-classic-color);
 }
 
-.keno-bets-table-mobile tbody tr.JACKOT .keno-bet-matches {
+.keno-bets-table-mobile tbody tr.JACKPOT .keno-bet-matches {
   background-color: var(--keno-type-jackpot-color);
 }
 
