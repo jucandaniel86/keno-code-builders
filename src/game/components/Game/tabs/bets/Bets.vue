@@ -11,11 +11,13 @@ import Ticket from './Ticket.vue'
 import TicketMobile from './TicketMobile.vue'
 import { computed } from 'vue'
 import { useUtils } from '@/core/core.Util'
+import { useI18n } from 'vue-i18n'
 
 //composables
 const { nextDraw, extractedNumbers, lotteryStatus } = storeToRefs(useLotteryStore())
 const { device } = storeToRefs(useAppStore())
 const { findCommonNumbers } = useUtils()
+const { t } = useI18n()
 
 //computed
 const sortedTickets = computed(() => {
@@ -43,11 +45,11 @@ const sortedTickets = computed(() => {
       <table class="keno-bets-table-mobile">
         <thead>
           <tr>
-            <th>Type</th>
-            <th>Draw</th>
-            <th>Ticket No.</th>
-            <th>Time</th>
-            <th>Bet</th>
+            <th>{{ t('bets.type') }}</th>
+            <th>{{ t('bets.draw') }}</th>
+            <th>{{ t('bets.ticketNo') }}</th>
+            <th>{{ t('bets.time') }}</th>
+            <th>{{ t('bets.bet') }}</th>
           </tr>
         </thead>
         <tbody :style="{ height: lotteryStatus === 'DRAW_START' ? 'auto' : '60px' }">

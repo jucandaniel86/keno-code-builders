@@ -11,6 +11,28 @@
         <path d="M4 12h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
         <path d="M4 17.5h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
       </symbol>
+      <symbol id="ticket-subscription" viewBox="0 0 24 24" fill="none">
+        <path
+          d="M5 6.5A1.5 1.5 0 0 1 6.5 5h11A1.5 1.5 0 0 1 19 6.5V8a1.5 1.5 0 0 1-1.5 1.5 1.5 1.5 0 0 0 0 3A1.5 1.5 0 0 1 19 14v1.5A1.5 1.5 0 0 1 17.5 17h-11A1.5 1.5 0 0 1 5 15.5V14a1.5 1.5 0 0 1 1.5-1.5 1.5 1.5 0 0 0 0-3A1.5 1.5 0 0 1 5 8Z"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M10.5 10.25c.4-1.3 1.6-2.25 3-2.25H14m-1-1.75 2.25 2.25L13 11.75"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M13.5 13.75c-.4 1.3-1.6 2.25-3 2.25H10m1 1.75-2.25-2.25L11 12.25"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </symbol>
 
       <symbol id="home" viewBox="0 0 24 24" fill="none">
         <path

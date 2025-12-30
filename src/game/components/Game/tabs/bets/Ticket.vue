@@ -35,9 +35,14 @@ const ticketTypeAlias = computed(() => {
       <span>{{ t('tabs.bet') }} {{ CurrencyConverter.Convert(props.ticket.stake) }}</span>
     </div>
     <div class="keno-results-item-numbers">
-      <div v-for="(ball, i) in props.ticket.balls" :key="`Ball${props.ticket.ticketNumber}-${i}`">
-        <span :class="{ match: props.matches.indexOf(ball) !== -1 }">{{ ball }}</span>
-      </div>
+      <template
+        v-for="(ball, i) in props.ticket.balls"
+        :key="`Ball${props.ticket.ticketNumber}-${i}`"
+      >
+        <div v-if="ball > 0">
+          <span :class="{ match: props.matches.indexOf(ball) !== -1 }">{{ ball }}</span>
+        </div>
+      </template>
     </div>
   </div>
 </template>

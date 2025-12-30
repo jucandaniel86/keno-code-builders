@@ -6,9 +6,12 @@ import { watch, ref } from 'vue'
 import SlideSelector from '../../SlideSelector.vue'
 import LinkIcon from '../../Shared/LinkIcon.vue'
 import Proxi from '@/core/core.Proxi'
+import { useI18n } from 'vue-i18n'
 
 const { MUTE_BG, VOLUME_MUSIC } = storeToRefs(useSettingsStore())
 const volume = ref<number>(VOLUME_MUSIC.value)
+
+const { t } = useI18n()
 
 watch(MUTE_BG, () => {
   if (MUTE_BG.value) {
@@ -24,22 +27,20 @@ watch(volume, (newValue) => {
 </script>
 <template>
   <div class="settings-component">
-    <CheckedOption label="Mute Sound" v-model="MUTE_BG" />
+    <CheckedOption
+      :label="MUTE_BG ? t('components.settings.enableSound') : t('components.settings.mute')"
+      v-model="MUTE_BG"
+    />
     <SlideSelector
-      label="Music Volumne"
-      v-model="volume"
+      :label="t('components.settings.musicVol')"
+      v-model="VOLUME_MUSIC"
       :disabled="MUTE_BG"
       :min-value="0"
       :max-value="1"
       :step="0.1"
-      @valueChange="
-        (val) => {
-          VOLUME_MUSIC = val
-        }
-      "
     />
     <LinkIcon
-      label="Lobby URL"
+      :label="t('components.settings.lobbyURL')"
       icon="home"
       @onClick="
         () => {
@@ -48,7 +49,7 @@ watch(volume, (newValue) => {
       "
     />
     <LinkIcon
-      label="Rules"
+      :label="t('components.settings.rules')"
       icon="info"
       @onClick="
         () => {
@@ -58,7 +59,7 @@ watch(volume, (newValue) => {
     />
 
     <LinkIcon
-      label="History"
+      :label="t('components.settings.history')"
       icon="history"
       @onClick="
         () => {

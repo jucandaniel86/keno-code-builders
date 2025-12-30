@@ -88,8 +88,6 @@ export const useGameStore = defineStore('game', () => {
 
   const sidebarDisabled = ref<boolean>(false)
 
-  const winningNumbers = ref<number[]>([])
-
   const analisis = ref<AnalisisType>({ hot: [], cold: [], statistics: {} })
 
   const analisisLoading = ref<boolean>(false)
@@ -97,6 +95,8 @@ export const useGameStore = defineStore('game', () => {
   const randomSelectionLoading = ref<boolean>(false)
 
   const results = ref<number[]>([])
+
+  const nextDraws = ref<number>(1)
 
   const setGamePlay = (_payload: any) => {
     game.value = {
@@ -131,12 +131,12 @@ export const useGameStore = defineStore('game', () => {
 
   const disableSidebar = (_payload: boolean) => (sidebarDisabled.value = _payload)
 
-  const clearWinningNumbers = () => {
-    winningNumbers.value = []
-  }
-
   const setRandomSelectionLoading = (_payload: boolean) => {
     randomSelectionLoading.value = _payload
+  }
+
+  const setNextDraws = (subscriptions: number) => {
+    nextDraws.value = subscriptions
   }
 
   return {
@@ -149,10 +149,10 @@ export const useGameStore = defineStore('game', () => {
     results,
     resultsHistory,
     sidebarDisabled,
-    winningNumbers,
     analisis,
     analisisLoading,
     randomSelectionLoading,
+    nextDraws,
     setRandomSelectionLoading,
     disableSidebar,
     setGamePlay,
@@ -162,7 +162,7 @@ export const useGameStore = defineStore('game', () => {
     setDisabledInteraction,
     setGameType,
     setResults,
-    clearWinningNumbers,
     setAnalisys,
+    setNextDraws,
   }
 })

@@ -10,8 +10,12 @@ import StakeSelector from '../Shared/StakeSelector.vue'
 import { usePlaceBet } from '@/game/composables/usePlaceBet'
 import { DevicesEnum, useAppStore } from '@/stores/app'
 import { useLotteryStore } from '@/stores/lottery'
-import { GAME_TYPES_ENUM } from '@/config/app.config'
+import { GAME_TYPES_ENUM, MAX_SUBSCRIPTIONS } from '@/config/app.config'
 import SlideSelector from '../SlideSelector.vue'
+import CurrencyConverter from '@/core/core.CurrencyConvertor'
+import { useGameStore } from '@/stores/game'
+import AppIcon from '../Shared/AppIcon.vue'
+import Subscriptions from './bet/Subscriptions.vue'
 
 //types
 type BetComponent = {
@@ -26,12 +30,14 @@ const { t } = useI18n()
 const { setSessionData } = useSessionStore()
 const { setStatusData } = useStatusStore()
 const { betLevels, betIndex } = storeToRefs(useSessionStore())
+const { nextDraws } = storeToRefs(useGameStore())
 const { activeGame } = storeToRefs(useLotteryStore())
-const { betDisabled, placeBet } = usePlaceBet()
+const { betDisabled, placeBet, total } = usePlaceBet()
 
 //models
 const sidebarDisabled = ref<boolean>(false)
 const betLoading = ref<boolean>(false)
+const displaySubscriptions = ref<boolean>(false)
 
 //methods
 const updateBetIndex = (value: number) => {
@@ -65,6 +71,12 @@ watch(activeGame, () => {
 </script>
 <template>
   <div class="keno-bet-options">
+    <Subscriptions
+      v-if="device !== DevicesEnum.DESKTOP"
+      :disabled="props.disabled || betDisabled || betLoading"
+      :class="{ show: displaySubscriptions }"
+      @onClose="displaySubscriptions = false"
+    />
     <StakeSelector
       :title="stakeSelectorLabel"
       :options="betLevels"
@@ -75,16 +87,34 @@ watch(activeGame, () => {
     />
     <SlideSelector
       v-if="device === DevicesEnum.DESKTOP"
-      :max-value="50"
-      :min-value="1"
-      :label="'Draws'"
-    />
-    <button
-      class="bet-btn"
       :disabled="props.disabled || betDisabled || betLoading"
-      @click.prevent="handlePlaceBet"
-    >
-      {{ t('components.sidebar.placeBet') }}
-    </button>
+      :max-value="MAX_SUBSCRIPTIONS"
+      :min-value="1"
+      :label="t('components.sidebar.draws')"
+      v-model="nextDraws"
+      @valueChange="
+        (val) => {
+          nextDraws = val
+        }
+      "
+    />
+    <div class="place-bet-container">
+      <button
+        class="bet-btn"
+        :disabled="props.disabled || betDisabled || betLoading"
+        @click.prevent="handlePlaceBet"
+      >
+        {{ t('components.sidebar.placeBet') }}
+        ({{ CurrencyConverter.Convert(total) }})
+      </button>
+      <button
+        v-if="device !== DevicesEnum.DESKTOP"
+        :disabled="props.disabled || betDisabled || betLoading"
+        class="mobile-subscription-btn"
+        @click.prevent="displaySubscriptions = true"
+      >
+        <AppIcon :icon="'ticket-subscription'" />
+      </button>
+    </div>
   </div>
 </template>

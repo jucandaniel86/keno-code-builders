@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, watch } from 'vue'
 
 const props = withDefaults(
   defineProps<{
@@ -48,7 +48,7 @@ const emit = defineEmits<{
 
 const clamp = (val: number) => Math.min(Math.max(val, props.minValue), props.maxValue)
 
-const value = ref(clamp(props.modelValue ?? props.minValue))
+const value = defineModel<number>({ default: 0 })
 
 watch(
   () => props.modelValue,
@@ -62,7 +62,7 @@ watch(
 watch(
   value,
   (newVal, oldVal) => {
-    const clamped = clamp(newVal)
+    const clamped = clamp(newVal as any)
     if (clamped !== oldVal) {
       value.value = clamped
       emit('valueChange', clamped)
@@ -73,6 +73,7 @@ watch(
 
 const percent = computed(() => {
   const range = props.maxValue - props.minValue || 1
+
   return ((value.value - props.minValue) / range) * 100
 })
 </script>

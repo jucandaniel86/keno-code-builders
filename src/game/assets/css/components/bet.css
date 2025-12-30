@@ -67,4 +67,68 @@
     text-align: center;
     background-color: transparent;
   }
+
+  .place-bet-container {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .mobile-subscription-btn {
+    cursor: pointer;
+    background-color: #f0d7a4;
+    color: #fff;
+    width: 100%;
+    max-width: 50px;
+    border-radius: 0.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mobile-subscription-btn svg {
+    width: 32px;
+    height: 32px;
+    fill: #fff;
+    color: #fff;
+  }
+
+  .subscriptions-wrapper {
+    display: flex;
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    background-color: var(--paytable-bg-color);
+    width: 100%;
+    align-items: center;
+    padding: 0.5rem;
+    flex-direction: column;
+    transition: opacity 200ms ease-in;
+    opacity: 0;
+    z-index: -1;
+  }
+
+  .subscriptions-wrapper.show {
+    opacity: 1;
+    z-index: 10;
+  }
+
+  .subscriptions-wrapper .slide-selector {
+    max-width: 70%;
+    width: 100%;
+  }
+
+  .close-btn-subscriptions {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .close-btn-subscriptions svg {
+    width: 25px;
+    height: 25px;
+  }
 }

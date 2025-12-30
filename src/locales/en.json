@@ -9,7 +9,8 @@
     },
     "sidebar": {
       "betAmount": "Bet Amount",
-      "placeBet": "PLACE BET"
+      "placeBet": "PLACE BET",
+      "draws": "Draws"
     },
     "settings": {
       "instantBet": "Instant Bet",
@@ -17,7 +18,12 @@
       "maxBet": "Max Bet",
       "gameInfo": "Game Info",
       "exit": "Exit",
-      "history": "History"
+      "history": "History",
+      "lobbyURL": "Lobby URL",
+      "musicVol": "Music Volumne",
+      "rules": "Rules",
+      "mute": "Mute Sound",
+      "enableSound": "Enable Sound"
     },
     "trends": {
       "title": "Trends from the last 8 games"
@@ -97,6 +103,13 @@
     "drawID": "Draw ID",
     "ticketID": "Ticket ID",
     "stake": "Stake",
+    "bet": "Bet"
+  },
+  "bets": {
+    "type": "Type",
+    "draw": "Draw",
+    "ticketNo": "Ticket No.",
+    "time": "Time",
     "bet": "Bet"
   }
 }

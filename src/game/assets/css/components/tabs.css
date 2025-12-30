@@ -245,4 +245,10 @@
     border-bottom: 3px solid var(--tabs-border-mobile-color);
     color: #fff;
   }
+
+  .keno-results-item {
+    width: calc(100% - 2rem);
+    margin: 0.5rem 1rem;
+    padding: 0.5rem;
+  }
 }

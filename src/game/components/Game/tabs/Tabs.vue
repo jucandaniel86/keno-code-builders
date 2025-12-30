@@ -14,6 +14,7 @@ import Loading from '../../Shared/Loading.vue'
 import Results from './results/Results.vue'
 import Bets from './bets/Bets.vue'
 import SoundManager from '@/core/core.Sounds'
+import Future from './future/Future.vue'
 
 type TabsComponentType = {
   tabs?: KenoGameTabsE[]
@@ -64,6 +65,7 @@ const onTabChange = (tab: KenoGameTabsT) => {
         :results="analisis.statistics.draws"
       />
       <Bets v-if="currentTab.id === KenoGameTabsE.BETS" />
+      <Future v-if="currentTab.id === KenoGameTabsE.FUTURE" />
     </div>
   </div>
 </template>

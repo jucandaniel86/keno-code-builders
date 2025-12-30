@@ -28,6 +28,7 @@ import { storeToRefs } from 'pinia'
 import { useGameStore } from '@/stores/game'
 import ResultsResponseData from './models/results/ResultsResponseData'
 import ResultsRequestData from './models/results/ResultsRequestData'
+import type SubscriptionResponseData from './models/subscription/SubscriptionResponseData'
 
 export default class NetworkController extends Singleton {
   public serverProtocol: string = ''
@@ -168,6 +169,32 @@ export default class NetworkController extends Singleton {
     finalRequest.choicesMade = selectedNumbers.value
     finalRequest.sessionID = this.loginRequestData.sessionID
     finalRequest.selections = ['bet', 1]
+    finalRequest.coins = [1]
+    finalRequest.stakes = [bet.value]
+    finalRequest.currency = credit.value?.currency
+    finalRequest.kenoGameType = activeGame.value
+    finalRequest.nextDrawNumber = nextDrawNumber.value
+    finalRequest.nextTimestamp = nextTimestamp.value
+
+    if (activeGame.value === GAME_TYPES_ENUM.HOT) {
+      finalRequest.choicesMade = []
+      finalRequest.kenoBetType = hotBetOption.value
+    }
+
+    return finalRequest
+  }
+
+  private generateSubscriptionData(subsciptions: number = 1): RequestData {
+    const finalRequest = new BetRequestData()
+    const { selectedNumbers } = storeToRefs(useGameStore())
+    const { bet } = storeToRefs(useStatusStore())
+    const { credit } = storeToRefs(useSessionStore())
+    const { nextDrawNumber, nextTimestamp, activeGame, hotBetOption } =
+      storeToRefs(useLotteryStore())
+
+    finalRequest.choicesMade = selectedNumbers.value
+    finalRequest.sessionID = this.loginRequestData.sessionID
+    finalRequest.selections = ['subscription', subsciptions]
     finalRequest.coins = [1]
     finalRequest.stakes = [bet.value]
     finalRequest.currency = credit.value?.currency
@@ -343,6 +370,17 @@ export default class NetworkController extends Singleton {
 
         return response
       })
+    }
+    return null
+  }
+
+  /**
+   *
+   * @returns {Promise<SubscriptionResponseData | null>}
+   */
+  public async subscribe(subsciptions: number): Promise<SubscriptionResponseData | null> {
+    if (this.isAuthenticated()) {
+      return this.ws.requestNextGame(this.generateSubscriptionData(subsciptions) as any)
     }
     return null
   }

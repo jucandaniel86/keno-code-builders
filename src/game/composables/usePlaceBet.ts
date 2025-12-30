@@ -12,7 +12,7 @@ import SoundManager from '@/core/core.Sounds'
 
 export const usePlaceBet = () => {
   const { t } = useI18n()
-  const { selectedNumbers } = storeToRefs(useGameStore())
+  const { selectedNumbers, nextDraws } = storeToRefs(useGameStore())
   const { credit, bet } = storeToRefs(useStatusStore())
   const { bettingOpen, nextDrawSeconds, activeGame, hotBetOption } = storeToRefs(useLotteryStore())
   const { error } = useAlerts()
@@ -40,6 +40,10 @@ export const usePlaceBet = () => {
     const noTickets = 1
     return noTickets * bet.value
   }
+
+  const total = computed(() => {
+    return nextDraws.value * bet.value
+  })
 
   const isInsufficientFunds = () => {
     const total = calculateTotal()
@@ -86,7 +90,7 @@ export const usePlaceBet = () => {
     SoundManager.Instance().play('PLACE_BET')
 
     const { success, error } = useAlerts()
-    const { setSelectedNumbers } = useGameStore()
+    const { setSelectedNumbers, setNextDraws, nextDraws } = useGameStore()
 
     const betData = await NetworkController.Instance().bet()
 
@@ -96,6 +100,11 @@ export const usePlaceBet = () => {
 
     success(t('modals.TEXT_PLACED_BET'))
 
+    if (nextDraws) {
+      await NetworkController.Instance().subscribe(nextDraws)
+      setNextDraws(1)
+    }
+
     await NetworkController.Instance().bets()
     await NetworkController.Instance().balance()
 
@@ -103,6 +112,7 @@ export const usePlaceBet = () => {
   }
 
   return {
+    total,
     betDisabled,
     placeBet,
   }
