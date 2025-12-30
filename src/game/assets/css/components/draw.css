@@ -44,6 +44,6 @@
   }
 
   .draw-container canvas:first-child {
-    max-height: 70%;
+    max-height: 65%;
   }
 }
